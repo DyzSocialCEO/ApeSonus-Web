@@ -176,9 +176,12 @@ footer{border-top:1px solid var(--w10);padding:50px 0 36px}.footer-inner{display
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-function openOverlay(){document.getElementById('rewards-overlay').classList.add('open');document.body.style.overflow='hidden';window.scrollTo(0,0)}
-function closeOverlay(){document.getElementById('rewards-overlay').classList.remove('open');document.body.style.overflow=''}
+function openOverlay(){document.getElementById('rewards-overlay').classList.add('open');document.body.style.overflow='hidden';window.scrollTo(0,0);if(location.hash!=='#rewards')history.replaceState(null,'','#rewards')}
+function closeOverlay(){document.getElementById('rewards-overlay').classList.remove('open');document.body.style.overflow='';if(location.hash==='#rewards')history.replaceState(null,'',location.pathname+location.search)}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay()});
+// Auto-open rewards overlay when arriving via apesonus.com/#rewards (Telegram channel link target)
+if(location.hash==='#rewards'||location.search.includes('rewards')){window.addEventListener('DOMContentLoaded',openOverlay)}
+window.addEventListener('hashchange',()=>{if(location.hash==='#rewards')openOverlay();else closeOverlay()});
 </script>
 </body>
 </html>
