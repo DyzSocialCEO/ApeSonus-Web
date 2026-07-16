@@ -1,4 +1,4 @@
-/* APESONUS — landing. Dark stage, editorial serif, app-forward. */
+/* APESONUS landing. Dark stage, editorial serif, app-forward. */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#08080c; --bg2:#0d0d13; --card:#101018; --card2:#14141d;
@@ -148,6 +148,7 @@ nav.scrolled{background:rgba(8,8,12,.8);backdrop-filter:blur(20px);border-bottom
 .rew-k{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:12px;color:var(--acid)}
 .rew-k.gold{color:var(--gold)}
 .rew p{color:var(--w70);font-size:15px}
+.rew p + p{margin-top:14px}
 .fineprint{text-align:center;max-width:720px;margin:0 auto;font-size:13px;color:var(--w45);line-height:1.7}
 .fineprint a{color:var(--acid)}
 .fineprint a:hover{text-decoration:underline}
