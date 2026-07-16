@@ -143,12 +143,19 @@ nav.scrolled{background:rgba(8,8,12,.8);backdrop-filter:blur(20px);border-bottom
 
 /* REWARDS */
 .rewards{background:var(--bg2)}
-.rew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px}
+.rew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px;align-items:start}
 .rew{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 26px}
 .rew-k{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:12px;color:var(--acid)}
 .rew-k.gold{color:var(--gold)}
 .rew p{color:var(--w70);font-size:15px}
 .rew p + p{margin-top:14px}
+.rew details{margin-top:14px}
+.rew summary{list-style:none;cursor:pointer;color:var(--acid);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.rew summary::-webkit-details-marker{display:none}
+.rew summary::after{content:"Read more"}
+.rew details[open] summary::after{content:"Less"}
+.rew summary:hover{text-decoration:underline}
+.rew details[open] summary{margin-bottom:14px}
 .fineprint{text-align:center;max-width:720px;margin:0 auto;font-size:13px;color:var(--w45);line-height:1.7}
 .fineprint a{color:var(--acid)}
 .fineprint a:hover{text-decoration:underline}
