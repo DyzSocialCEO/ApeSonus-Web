@@ -208,3 +208,39 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-top:
   .mood-list li{grid-template-columns:28px 76px 1fr;gap:10px;padding:13px 10px}
   .hero-meta{flex-wrap:wrap;gap:10px}
 }
+
+/* CASE FILES */
+.cases{background:var(--bg2)}
+.cases-intro{max-width:720px;margin:0 auto 44px;text-align:center}
+.cases-intro p{color:var(--w70);font-size:16px;margin-bottom:14px}
+.cases-intro b{color:#fff}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.case:hover{transform:translateY(-4px);border-color:rgba(255,200,71,.35)}
+.case-n{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.case h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.15;margin-bottom:12px}
+.case p{color:var(--w70);font-size:14.5px;margin-bottom:18px}
+.case-meta{display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--w25);padding-top:16px;border-top:1px solid var(--line);margin-top:auto}
+.case-meta b{font-weight:700}
+.case-btn{display:inline-block;margin-top:18px;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(255,200,71,.35);border-radius:9px;padding:11px 14px;transition:background .2s,color .2s}
+.case-btn:hover{background:var(--gold);color:#0a0a0a}
+.cases-note{text-align:center;max-width:640px;margin:34px auto 0;font-size:14px;color:var(--w45)}
+
+/* $ONUS */
+.onus-lead{max-width:700px;margin:0 auto 44px;text-align:center}
+.onus-lead p{color:var(--w70);font-size:16.5px;margin-bottom:14px}
+.onus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.onus-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px}
+.onus-k{font-family:var(--serif);font-weight:600;font-size:20px;margin-bottom:11px;color:var(--gold)}
+.onus-card p{color:var(--w70);font-size:14.5px}
+.ca-slot{max-width:640px;margin:34px auto 0;text-align:center;border:1px dashed rgba(255,200,71,.35);border-radius:18px;padding:26px 22px;background:rgba(255,200,71,.03)}
+.ca-k{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--w25);margin-bottom:10px}
+.ca-v{font-family:var(--mono);font-size:15px;color:var(--gold);word-break:break-all;margin-bottom:12px}
+.ca-slot p{font-size:13px;color:var(--w45);max-width:420px;margin:0 auto}
+
+/* CTA buttons row */
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .cases-grid,.onus-grid{grid-template-columns:1fr}
+}
