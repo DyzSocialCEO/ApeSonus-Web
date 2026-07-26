@@ -233,7 +233,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-top:
 .onus-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px}
 .onus-k{font-family:var(--serif);font-weight:600;font-size:20px;margin-bottom:11px;color:var(--gold)}
 .onus-card p{color:var(--w70);font-size:14.5px}
-.ca-slot{max-width:640px;margin:34px auto 0;text-align:center;border:1px dashed rgba(255,200,71,.35);border-radius:18px;padding:26px 22px;background:rgba(255,200,71,.03)}
+.ca-slot{max-width:640px;margin:0 auto 38px;text-align:center;border:1px dashed rgba(255,200,71,.35);border-radius:18px;padding:26px 22px;background:rgba(255,200,71,.03)}
 .ca-k{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--w25);margin-bottom:10px}
 .ca-v{font-family:var(--mono);font-size:15px;color:var(--gold);word-break:break-all;margin-bottom:12px}
 .ca-slot p{font-size:13px;color:var(--w45);max-width:420px;margin:0 auto}
