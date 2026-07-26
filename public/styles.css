@@ -43,6 +43,10 @@ nav.scrolled{background:rgba(8,8,12,.8);backdrop-filter:blur(20px);border-bottom
 .nav-links a:hover{color:#fff}
 .nav-cta{font-weight:600;color:#08080c!important;background:var(--acid);padding:9px 17px;border-radius:9px}
 .nav-cta:hover{background:#d4ff5a}
+.ca-bar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:9px 26px;background:rgba(255,200,71,.10);border-top:1px solid rgba(255,200,71,.22);border-bottom:1px solid rgba(255,200,71,.22);backdrop-filter:blur(20px)}
+.ca-bar-k{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,200,71,.75)}
+.ca-bar-v{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--gold)}
+.ca-bar:hover .ca-bar-v{text-decoration:underline}
 
 /* buttons */
 .btn-primary{display:inline-block;font-weight:600;font-size:15px;color:#08080c;background:var(--acid);padding:14px 26px;border-radius:11px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 0 rgba(198,255,46,0)}
@@ -52,7 +56,7 @@ nav.scrolled{background:rgba(8,8,12,.8);backdrop-filter:blur(20px);border-bottom
 .btn-line:hover{border-color:var(--w25);color:#fff}
 
 /* HERO */
-.hero{position:relative;z-index:2;padding:150px 26px 90px;max-width:1160px;margin:0 auto;overflow:hidden}
+.hero{position:relative;z-index:2;padding:196px 26px 90px;max-width:1160px;margin:0 auto;overflow:hidden}
 .hero-eq{position:absolute;top:0;left:0;right:0;height:100%;display:flex;align-items:center;justify-content:center;gap:10px;opacity:.09;pointer-events:none;z-index:-1}
 .hero-eq span{width:5px;background:var(--acid);border-radius:3px;animation:eq 1.4s ease-in-out infinite}
 .hero-eq span:nth-child(odd){animation-duration:1.9s}
@@ -190,7 +194,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-top:
 @media (max-width:900px){
   .nav-links{gap:18px}
   .nav-links a:not(.nav-cta){display:none}
-  .hero{padding-top:120px}
+  .hero{padding-top:166px}
+  .ca-bar{gap:8px;padding:8px 16px}
   .hero-grid{grid-template-columns:1fr;gap:10px}
   .hero-phones{height:440px;margin-top:20px}
   .hero-phones .phone{width:210px}
@@ -209,23 +214,6 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-top:
   .hero-meta{flex-wrap:wrap;gap:10px}
 }
 
-/* CASE FILES */
-.cases{background:var(--bg2)}
-.cases-intro{max-width:720px;margin:0 auto 44px;text-align:center}
-.cases-intro p{color:var(--w70);font-size:16px;margin-bottom:14px}
-.cases-intro b{color:#fff}
-.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.case{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
-.case:hover{transform:translateY(-4px);border-color:rgba(255,200,71,.35)}
-.case-n{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.case h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.15;margin-bottom:12px}
-.case p{color:var(--w70);font-size:14.5px;margin-bottom:18px}
-.case-meta{display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--w25);padding-top:16px;border-top:1px solid var(--line);margin-top:auto}
-.case-meta b{font-weight:700}
-.case-btn{display:inline-block;margin-top:18px;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(255,200,71,.35);border-radius:9px;padding:11px 14px;transition:background .2s,color .2s}
-.case-btn:hover{background:var(--gold);color:#0a0a0a}
-.cases-note{text-align:center;max-width:640px;margin:34px auto 0;font-size:14px;color:var(--w45)}
-
 /* $ONUS */
 .onus-lead{max-width:700px;margin:0 auto 44px;text-align:center}
 .onus-lead p{color:var(--w70);font-size:16.5px;margin-bottom:14px}
@@ -242,5 +230,5 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-top:
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
 @media (max-width:900px){
-  .cases-grid,.onus-grid{grid-template-columns:1fr}
+  .onus-grid{grid-template-columns:1fr}
 }
