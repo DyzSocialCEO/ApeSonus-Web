@@ -75,9 +75,8 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
 .flick{position:absolute;inset:0;background:rgba(198,255,46,.05);opacity:0;animation:flick 9s linear infinite;pointer-events:none}
 @keyframes flick{0%,92%,100%{opacity:0}94%{opacity:1}96%{opacity:0}98%{opacity:.7}}
 
-.appwrap{position:fixed;z-index:9;top:50%;left:50%;width:min(72vw,760px);transform:translate(-50%,-50%) scale(.1) rotate(-14deg);opacity:0;transition:all .95s cubic-bezier(.34,1.4,.4,1)}
-.appwrap.pop{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-1.5deg)}
-.appwrap.dock{top:84px;left:auto;right:18px;width:min(32vw,330px);transform:rotate(3deg);opacity:1}
+.appwrap{position:fixed;z-index:9;top:84px;right:18px;width:min(32vw,330px);opacity:0;transform:rotate(3deg);transition:transform 1s cubic-bezier(.33,1,.68,1),opacity .55s ease;will-change:transform,opacity;backface-visibility:hidden}
+body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:paused}
 .appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
 .player{margin-top:20px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
 .player.show{transform:scale(1) rotate(-1.4deg)}
@@ -101,14 +100,14 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   .prayer p{font-size:18px}
   .cawrap code{font-size:10.5px}
   .cawrap .lab{display:none}
-  .appwrap.dock{width:44vw;top:76px;right:10px}
+  .appwrap{width:44vw;top:76px;right:10px}
   .player{margin-top:14px;padding:11px 12px}
   .spk{width:50px;height:50px}
   .player .m{font-size:13.5px}
 }
 </style>
 </head>
-<body>
+<body class="intro">
 <div class="stage">
   <div class="bar">
     <div class="corner">
@@ -150,7 +149,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
 </div>
 
 <div class="appwrap" id="app">
-  <img src="/comic/app-shot.webp" alt="The clinic, live right now" id="shot">
+  <img src="/comic/app-shot.webp" width="900" height="498" alt="The clinic, live right now" id="shot" fetchpriority="high" decoding="async">
   <div class="player" id="player">
     <div class="row">
       <button class="spk" id="spk" type="button" aria-label="Play the clip">
@@ -165,7 +164,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
     <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
   </div>
 </div>
-<audio id="track" preload="auto"></audio>
+<audio id="track" preload="none"></audio>
 
 <script>
 (function(){
@@ -182,11 +181,10 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   var ico=document.getElementById('ico'),state=document.getElementById('bstate');
   var PLAY='<path d="M8 5v14l11-7z" fill="currentColor"/>';
   var PAUSE='<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>';
-  var CAP=15,dead=false;
+  var STOP=18,FADE=2.6,IN=.7,dead=false,armed=false,timer=null;
 
   document.getElementById('tname').textContent=pick.title;
   document.getElementById('tartist').textContent=pick.artist;
-  a.src=pick.src;
 
   function paint(playing){
     ico.innerHTML=playing?PAUSE:PLAY;
@@ -196,26 +194,59 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   }
   paint(false);
 
-  a.addEventListener('error',function(){dead=true;player.querySelector('.row').style.display='none';state.textContent='';});
-  a.addEventListener('timeupdate',function(){if(a.currentTime>=CAP){a.pause();a.currentTime=0;paint(false)}});
-  a.addEventListener('ended',function(){paint(false)});
-  a.addEventListener('pause',function(){if(!a.ended)paint(false)});
-  a.addEventListener('play',function(){paint(true)});
+  function level(){
+    var t=a.currentTime,v=1;
+    if(t<IN)v=t/IN;
+    if(t>STOP-FADE)v=Math.min(v,(STOP-t)/FADE);
+    a.volume=Math.max(0,Math.min(1,v));
+    if(t>=STOP){a.pause();a.currentTime=0;a.volume=0}
+  }
+  function watch(on){
+    if(timer){clearInterval(timer);timer=null}
+    if(on)timer=setInterval(level,60);
+  }
+
+  a.addEventListener('error',function(){dead=true;watch(false);player.querySelector('.row').style.display='none';state.textContent=''});
+  a.addEventListener('ended',function(){watch(false);paint(false)});
+  a.addEventListener('pause',function(){watch(false);paint(false)});
+  a.addEventListener('play',function(){watch(true);paint(true)});
 
   function start(){
     if(dead)return;
-    if(a.currentTime>=CAP)a.currentTime=0;
+    if(!armed){armed=true;a.src=pick.src;a.load()}
+    if(a.currentTime>=STOP)a.currentTime=0;
+    a.volume=0;
     var p=a.play();
     if(p&&p.catch)p.catch(function(){spk.classList.add('beg');state.textContent='Press play'});
   }
   function toggle(){if(dead)return;if(a.paused){start()}else{a.pause()}}
-
   spk.addEventListener('click',toggle);
   shot.addEventListener('click',toggle);
 
-  setTimeout(function(){app.classList.add('pop')},350);
-  setTimeout(function(){app.classList.remove('pop');app.classList.add('dock')},1900);
-  setTimeout(function(){player.classList.add('show');start()},2650);
+  function shift(){
+    var t=app.style.transform;app.style.transition='none';app.style.transform='none';
+    var r=app.getBoundingClientRect();
+    app.style.transform=t;app.offsetHeight;app.style.transition='';
+    var big=Math.min(window.innerWidth*.72,760);
+    return {dx:Math.round(window.innerWidth/2-(r.left+r.width/2)),dy:Math.round(window.innerHeight/2-(r.top+r.height/2)),s:Math.max(1,big/r.width)};
+  }
+
+  function run(){
+    var m=shift();
+    var base='translate('+m.dx+'px,'+m.dy+'px) ';
+    app.style.transition='none';
+    app.style.transform=base+'scale(.14) rotate(-14deg)';
+    app.offsetHeight;
+    app.style.transition='';
+    setTimeout(function(){app.style.opacity='1';app.style.transform=base+'scale('+m.s.toFixed(3)+') rotate(-1.5deg)'},60);
+    setTimeout(function(){app.style.transform=''},1750);
+    setTimeout(function(){document.body.classList.remove('intro')},2850);
+    setTimeout(function(){player.classList.add('show')},2900);
+    setTimeout(start,3250);
+  }
+
+  if(document.readyState==='complete')run();
+  else window.addEventListener('load',run);
 
   var once=function(){if(!dead&&a.paused&&spk.classList.contains('beg'))start();document.removeEventListener('pointerdown',once)};
   document.addEventListener('pointerdown',once);
