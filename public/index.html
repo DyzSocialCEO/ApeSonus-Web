@@ -199,13 +199,22 @@ body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:pa
   a.addEventListener('pause',function(){paint(false)});
   a.addEventListener('play',function(){paint(true)});
 
+  var want=false;
+  function arm(){
+    if(armed||dead)return;
+    armed=true;a.preload='auto';a.src=pick.src;a.load();
+  }
   function start(){
     if(dead)return;
-    if(!armed){armed=true;a.src=pick.src;a.load()}
+    want=true;arm();
+    if(a.readyState<3)state.textContent='Loading';
     var p=a.play();
-    if(p&&p.catch)p.catch(function(){spk.classList.add('beg');state.textContent='Press play'});
+    if(p&&p.catch)p.catch(function(){want=false;spk.classList.add('beg');state.textContent='Press play'});
   }
-  function toggle(){if(dead)return;if(a.paused){start()}else{a.pause()}}
+  a.addEventListener('canplay',function(){
+    if(want&&a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}
+  });
+  function toggle(){if(dead)return;if(a.paused){start()}else{want=false;a.pause()}}
   spk.addEventListener('click',toggle);
   shot.addEventListener('click',toggle);
 
@@ -225,7 +234,7 @@ body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:pa
     app.offsetHeight;
     app.style.transition='';
     setTimeout(function(){app.style.opacity='1';app.style.transform=base+'scale('+m.s.toFixed(3)+') rotate(-1.5deg)'},60);
-    setTimeout(function(){app.style.transform=''},1750);
+    setTimeout(function(){app.style.transform='';arm()},1750);
     setTimeout(function(){document.body.classList.remove('intro')},2850);
     setTimeout(function(){player.classList.add('show')},2900);
     setTimeout(start,3250);
