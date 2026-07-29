@@ -27,7 +27,7 @@
 <meta name="theme-color" content="#07090b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","name":"APESONUS","url":"https://apesonus.com","logo":"https://apesonus.com/logo.png","sameAs":["https://x.com/apesonus","https://music.apesonus.com"]},
@@ -35,51 +35,163 @@
 ]}
 </script>
 <style>
-:root{--bg:#07090b;--ink:#e8edf1;--dim:#c7ced4;--faint:#6f777d;--acid:#c6ff2e;--paper:#fff7e8;--paper-ink:#0b0d0f}
+:root{--bg:#07090b;--ink:#e8edf1;--dim:#c7ced4;--faint:#77808a;--acid:#c6ff2e;--paper:#fff7e8;--paper-ink:#0b0d0f;--panel:#0d1116;--edge:#1c232b}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 22px 34px}
-.logo{display:flex;flex-direction:column;align-items:center;gap:10px}
-.logo img{width:56px;height:56px}
-.brand{font-weight:700;font-size:22px;letter-spacing:.14em;color:var(--acid)}
-.tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
-.prayer{background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:18px;padding:22px 24px;margin:32px auto 0;max-width:430px;text-align:left;box-shadow:6px 6px 0 #000}
-.prayer .k{font-family:"Space Grotesk",sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;color:#6b6b60}
-.prayer p{font-family:"Fraunces",Georgia,serif;font-size:17px;line-height:1.75;margin-top:8px}
-.line{font-size:14px;color:var(--dim);line-height:1.7;max-width:430px;margin:26px auto 0}
-.enter{display:inline-block;background:var(--acid);color:#0a0c0e;font-weight:700;font-size:15px;letter-spacing:.08em;padding:15px 40px;border-radius:10px;margin-top:24px;text-decoration:none}
-.enter:active{transform:scale(.98)}
-.coin{border-top:1px solid #283039;margin:32px auto 0;max-width:430px;padding-top:22px}
-.coin p{font-size:14px;color:var(--dim);line-height:1.7}
-.hold{display:inline-block;border:1px solid var(--acid);color:var(--acid);font-size:13px;font-weight:500;letter-spacing:.08em;padding:11px 26px;border-radius:10px;margin-top:16px;text-decoration:none}
-footer{font-size:10px;letter-spacing:.22em;color:var(--faint);margin-top:34px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.halftone{background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.4px);background-size:14px 14px}
+.k{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+.plate{display:inline-block;background:#f4c542;color:#0b0d0f;padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:2px solid #000;box-shadow:3px 3px 0 #000}
+.panel{background:var(--panel);border:3px solid #000;box-shadow:8px 8px 0 #000;overflow:hidden}
+h1,h2{font-family:"Anton",Impact,sans-serif;font-weight:400;letter-spacing:.01em;text-transform:uppercase;line-height:.95}
+
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;padding:64px 6vw}
+.hero-bg{position:absolute;inset:0;background:url(/comic/clinic-lab.webp) center/cover no-repeat;opacity:.16}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,11,.35),rgba(7,9,11,.92) 78%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;width:100%;max-width:1200px;margin:0 auto}
+.brandrow{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.brandrow img{width:44px;height:44px}
+.brandrow .b{font-weight:700;letter-spacing:.12em;color:var(--acid);font-size:17px}
+.brandrow .t{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.hero h1{font-size:clamp(52px,7vw,104px);margin:0 0 26px}
+.hero h1 .a{color:var(--acid)}
+.prayer{background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:18px;padding:20px 24px;max-width:520px;box-shadow:8px 8px 0 #000;position:relative}
+.prayer:after{content:"";position:absolute;left:44px;bottom:-16px;border:9px solid transparent;border-top-color:#000;border-bottom:0}
+.prayer .k{color:#6b6b60}
+.prayer p{font-family:"Fraunces",Georgia,serif;font-size:18px;line-height:1.7;margin-top:8px}
+.line{font-size:15px;color:var(--dim);line-height:1.7;max-width:520px;margin:26px 0 0}
+.ctas{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.enter{display:inline-block;background:var(--acid);color:#0a0c0e;font-weight:700;font-size:15px;letter-spacing:.08em;padding:16px 42px;border:3px solid #000;box-shadow:6px 6px 0 #000;text-decoration:none;text-transform:uppercase}
+.enter:active{transform:translate(2px,2px);box-shadow:4px 4px 0 #000}
+.ghost{display:inline-block;border:2px solid var(--acid);color:var(--acid);font-size:13px;font-weight:500;letter-spacing:.08em;padding:13px 26px;text-decoration:none;text-transform:uppercase}
+.doc{position:relative}
+.doc .panel{transform:rotate(2deg)}
+.doc img{display:block;width:100%;height:auto}
+.doc .plate{position:absolute;left:-14px;bottom:26px;transform:rotate(-2deg)}
+
+section{padding:96px 6vw}
+.wrap{max-width:1200px;margin:0 auto}
+.head{margin-bottom:40px}
+.head .k{color:var(--acid)}
+.head h2{font-size:clamp(34px,4vw,58px);margin-top:10px}
+.ward{display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.card{background:var(--panel);border:3px solid #000;box-shadow:6px 6px 0 #000;transition:transform .15s}
+.card:hover{transform:translate(-2px,-4px) rotate(-1deg)}
+.card img{display:block;width:100%;height:auto}
+.card .nm{padding:12px 14px;font-family:"Anton",Impact,sans-serif;font-size:19px;letter-spacing:.06em}
+.card .ln{padding:0 14px 14px;font-size:12.5px;color:var(--faint);line-height:1.5}
+.m-moon{color:#c6ff2e}.m-rekt{color:#ff4d6d}.m-cope{color:#38bdf8}.m-degen{color:#b15bff}.m-zen{color:#f4c542}
+
+.clipgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.clip video{display:block;width:100%;height:auto;background:#000}
+.clip{position:relative}
+.clip .plate{position:absolute;right:-12px;top:-14px;transform:rotate(2deg)}
+.cliptext p{font-size:15px;color:var(--dim);line-height:1.75;max-width:460px}
+
+.congr{text-align:center}
+.congr p{font-size:16px;color:var(--dim);line-height:1.75;max-width:560px;margin:14px auto 0}
+.ca{display:flex;align-items:center;justify-content:center;gap:0;max-width:660px;margin:30px auto 0;flex-wrap:wrap}
+.ca code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;color:var(--acid);background:var(--panel);border:3px solid #000;box-shadow:5px 5px 0 #000;padding:14px 18px;word-break:break-all;text-align:left}
+.copybtn{background:var(--acid);color:#0a0c0e;border:3px solid #000;box-shadow:5px 5px 0 #000;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.12em;padding:15px 20px;cursor:pointer;text-transform:uppercase;margin-left:14px}
+.copybtn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #000}
+.hold{display:inline-block;border:2px solid var(--acid);color:var(--acid);font-size:13px;font-weight:500;letter-spacing:.1em;padding:12px 28px;text-decoration:none;text-transform:uppercase;margin-top:26px}
+footer{padding:40px 6vw 46px;text-align:center;font-size:10px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase}
+
+@media(max-width:900px){
+  .hero{padding:84px 6vw 56px}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .doc{max-width:340px;margin:0 auto}
+  .ward{grid-template-columns:repeat(2,1fr);gap:16px}
+  .ward .card:last-child{grid-column:1/-1;max-width:52%;margin:0 auto}
+  .clipgrid{grid-template-columns:1fr;gap:36px}
+  .copybtn{margin:14px 0 0}
+}
 </style>
 </head>
 <body>
 
-<div class="logo">
-  <img src="/logo.png?v=2" alt="APESONUS">
-  <div class="brand">APESONUS</div>
-  <div class="tag">The entertainment clinic for crypto degeneracy</div>
-</div>
+<header class="hero halftone">
+  <div class="hero-bg"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="brandrow">
+        <img src="/logo.png?v=2" alt="APESONUS">
+        <div><div class="b">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
+      </div>
+      <h1>The market hurts.<br><span class="a">We prescribe bangers.</span></h1>
+      <div class="prayer">
+        <div class="k">The degen's prayer</div>
+        <p>Onus, I bought the top again.<br>
+        Grant me one banger before this candle closes.<br>
+        Forgive my leverage, as I forgive the dev who rugged me.<br>
+        Amen.</p>
+      </div>
+      <p class="line">Real therapy is $200 an hour and your therapist has never held a bag to zero. Ours is $1 a day and the whole staff lives on the chart with you.</p>
+      <div class="ctas">
+        <a class="enter" href="https://music.apesonus.com">Enter clinic</a>
+        <a class="ghost" href="#onus">Hold $ONUS</a>
+      </div>
+    </div>
+    <div class="doc">
+      <div class="panel"><img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" fetchpriority="high"></div>
+      <span class="plate">Dr. Onus · Unlicensed · Unbothered</span>
+    </div>
+  </div>
+</header>
 
-<div class="prayer">
-  <div class="k">THE DEGEN'S PRAYER</div>
-  <p>Onus, I bought the top again.<br>
-  Grant me one banger before this candle closes.<br>
-  Forgive my leverage, as I forgive the dev who rugged me.<br>
-  Amen.</p>
-</div>
+<section class="halftone">
+  <div class="wrap">
+    <div class="head"><div class="k">Meanwhile, in the ward</div><h2>Pick where it hurts</h2></div>
+    <div class="ward">
+      <div class="card"><img src="/comic/moon.webp" alt="MOON ward" loading="lazy"><div class="nm m-moon">MOON</div><div class="ln">I'm up 4% and already retired.</div></div>
+      <div class="card"><img src="/comic/rekt.webp" alt="REKT ward" loading="lazy"><div class="nm m-rekt">REKT</div><div class="ln">My portfolio is now historical evidence.</div></div>
+      <div class="card"><img src="/comic/cope.webp" alt="COPE ward" loading="lazy"><div class="nm m-cope">COPE</div><div class="ln">The fundamentals remain imaginary.</div></div>
+      <div class="card"><img src="/comic/degen.webp" alt="DEGEN ward" loading="lazy"><div class="nm m-degen">DEGEN</div><div class="ln">I signed it because the frog looked trustworthy.</div></div>
+      <div class="card"><img src="/comic/zen.webp" alt="ZEN ward" loading="lazy"><div class="nm m-zen">ZEN</div><div class="ln">Money is temporary. The screenshot is forever.</div></div>
+    </div>
+  </div>
+</section>
 
-<p class="line">Real therapy is $200 an hour and your therapist has never held a bag to zero. Ours is $1 a day and the whole staff lives on the chart with you.</p>
+<section>
+  <div class="wrap clipgrid">
+    <div class="clip">
+      <div class="panel">
+        <video src="/clip.mp4" poster="/comic/session.webp" controls muted loop playsinline preload="none"></video>
+      </div>
+      <span class="plate">Field footage</span>
+    </div>
+    <div class="cliptext">
+      <div class="head" style="margin-bottom:18px"><div class="k">Inside the clinic</div><h2>Fifteen seconds of treatment</h2></div>
+      <p>Seven unlicensed therapists, five conditions, one waiting room with suspicious lighting. Whatever the market did to you, there is already a song about it in here. Press play, then come get diagnosed properly.</p>
+    </div>
+  </div>
+</section>
 
-<a class="enter" href="https://music.apesonus.com">ENTER CLINIC</a>
+<section id="onus" class="congr halftone">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:8px"><div class="k">The congregation</div><h2>Hold $ONUS</h2></div>
+    <p>$ONUS is the coin of the congregation. Hold it in solidarity with every degen who made this movement possible. That is the whole story.</p>
+    <div class="ca">
+      <code id="ca">YOUR-REAL-CA</code>
+      <button class="copybtn" id="copyca" type="button">Copy CA</button>
+    </div>
+    <a class="hold" href="https://music.apesonus.com/onus">Get it in the clinic</a>
+  </div>
+</section>
 
-<div class="coin">
-  <p>$ONUS is the coin of the congregation. Hold it in solidarity with every degen who made this movement possible. That is the whole story.</p>
-  <a class="hold" href="https://music.apesonus.com/onus">HOLD $ONUS</a>
-</div>
+<footer>Unlicensed · Unbothered · Not financial advice · © 2026 APESONUS</footer>
 
-<footer>UNLICENSED · UNBOTHERED · NOT FINANCIAL ADVICE</footer>
-
+<script>
+(function(){
+  var ca=document.getElementById('ca'), btn=document.getElementById('copyca');
+  if(ca.textContent.indexOf('PASTE')===0){ca.textContent='CA POSTED SOON';btn.style.display='none';return}
+  btn.addEventListener('click',function(){
+    navigator.clipboard.writeText(ca.textContent.trim()).then(function(){
+      btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy CA'},1500);
+    });
+  });
+})();
+</script>
 </body>
 </html>
