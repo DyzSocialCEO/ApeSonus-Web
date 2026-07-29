@@ -173,7 +173,7 @@ body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:pa
   else{btn.addEventListener('click',function(){navigator.clipboard.writeText(ca.textContent.trim()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)})})}
 
   var TRACKS=[
-    {src:"https://apesonus-images.b-cdn.net/images-rekterapy/ape_first.mp3",title:"APE FIRST",artist:"Satosheek"}
+    {src:"/ape-first.mp3",title:"APE FIRST",artist:"Satosheek"}
   ];
   var pick=TRACKS[Math.floor(Math.random()*TRACKS.length)];
   var app=document.getElementById('app'),player=document.getElementById('player'),shot=document.getElementById('shot');
@@ -181,7 +181,7 @@ body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:pa
   var ico=document.getElementById('ico'),state=document.getElementById('bstate');
   var PLAY='<path d="M8 5v14l11-7z" fill="currentColor"/>';
   var PAUSE='<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>';
-  var STOP=18,FADE=2.6,IN=.7,dead=false,armed=false,timer=null;
+  var dead=false,armed=false;
 
   document.getElementById('tname').textContent=pick.title;
   document.getElementById('tartist').textContent=pick.artist;
@@ -194,28 +194,14 @@ body.intro .dots,body.intro .flick,body.intro .right img{animation-play-state:pa
   }
   paint(false);
 
-  function level(){
-    var t=a.currentTime,v=1;
-    if(t<IN)v=t/IN;
-    if(t>STOP-FADE)v=Math.min(v,(STOP-t)/FADE);
-    a.volume=Math.max(0,Math.min(1,v));
-    if(t>=STOP){a.pause();a.currentTime=0;a.volume=0}
-  }
-  function watch(on){
-    if(timer){clearInterval(timer);timer=null}
-    if(on)timer=setInterval(level,60);
-  }
-
-  a.addEventListener('error',function(){dead=true;watch(false);player.querySelector('.row').style.display='none';state.textContent=''});
-  a.addEventListener('ended',function(){watch(false);paint(false)});
-  a.addEventListener('pause',function(){watch(false);paint(false)});
-  a.addEventListener('play',function(){watch(true);paint(true)});
+  a.addEventListener('error',function(){dead=true;player.querySelector('.row').style.display='none';state.textContent=''});
+  a.addEventListener('ended',function(){paint(false)});
+  a.addEventListener('pause',function(){paint(false)});
+  a.addEventListener('play',function(){paint(true)});
 
   function start(){
     if(dead)return;
     if(!armed){armed=true;a.src=pick.src;a.load()}
-    if(a.currentTime>=STOP)a.currentTime=0;
-    a.volume=0;
     var p=a.play();
     if(p&&p.catch)p.catch(function(){spk.classList.add('beg');state.textContent='Press play'});
   }
