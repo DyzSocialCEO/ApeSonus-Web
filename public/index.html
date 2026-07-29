@@ -38,99 +38,119 @@
 :root{--bg:#07090b;--ink:#e8edf1;--dim:#c7ced4;--faint:#77808a;--acid:#c6ff2e;--paper:#fff7e8;--paper-ink:#0b0d0f}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.stage{min-height:100svh;position:relative;display:flex;flex-direction:column}
-.bg{position:absolute;inset:0;background:url(/comic/clinic-lab.webp) center/cover no-repeat;opacity:.12;animation:drift 40s linear infinite alternate}
-.fade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(7,9,11,.2),rgba(7,9,11,.95) 75%)}
-.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.4px);background-size:14px 14px;animation:dotdrift 60s linear infinite}
-@keyframes drift{from{transform:scale(1)}to{transform:scale(1.07)}}
+.stage{min-height:100svh;display:flex;flex-direction:column}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(10,13,16,.92);border-bottom:1px solid #1c232b;padding:12px 22px;backdrop-filter:blur(6px)}
+.corner{display:flex;align-items:center;gap:11px}
+.corner img{width:38px;height:38px}
+.corner .b{font-weight:700;font-size:18px;letter-spacing:.12em;color:var(--acid)}
+.corner .t{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-top:1px}
+.cawrap{display:flex;align-items:center;gap:10px}
+.cawrap .lab{font-family:"Fraunces",serif;font-style:italic;font-size:17px;color:var(--paper)}
+.cawrap code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;color:var(--acid);background:#0d1116;border:1px solid #283039;border-radius:6px;padding:8px 12px}
+.copy{background:var(--acid);color:#0a0c0e;border:2px solid #000;box-shadow:3px 3px 0 #000;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.1em;padding:9px 16px;cursor:pointer;text-transform:uppercase}
+.copy:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.left{display:flex;flex-direction:column;justify-content:center;padding:56px 5vw;position:relative}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.4px);background-size:14px 14px;animation:dotdrift 60s linear infinite;pointer-events:none}
 @keyframes dotdrift{from{background-position:0 0}to{background-position:140px 280px}}
-
-.rxbar{position:relative;z-index:3;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 16px 0}
-.rxpill{background:var(--paper);color:var(--paper-ink);border:2px solid #000;box-shadow:4px 4px 0 #000;font-size:12px;letter-spacing:.06em;padding:10px 16px;display:flex;align-items:center;gap:10px;animation:pulse 2.2s ease-out 1}
-.rxpill b{font-family:"Fraunces",serif;font-style:italic;font-size:15px}
-.rxpill code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;word-break:break-all}
-.copy{background:var(--acid);color:#0a0c0e;border:2px solid #000;box-shadow:4px 4px 0 #000;font-family:inherit;font-weight:700;font-size:11px;letter-spacing:.12em;padding:11px 16px;cursor:pointer;text-transform:uppercase}
-.copy:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
-@keyframes pulse{0%{box-shadow:4px 4px 0 #000,0 0 0 0 rgba(198,255,46,.55)}70%{box-shadow:4px 4px 0 #000,0 0 0 18px rgba(198,255,46,0)}100%{box-shadow:4px 4px 0 #000}}
-
-.grid{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;width:100%;max-width:1150px;margin:0 auto;padding:34px 6vw 24px}
-.col{text-align:center}
 .up{opacity:0;transform:translateY(18px);animation:up .7s cubic-bezier(.2,.7,.2,1) forwards}
-.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}.d5{animation-delay:.6s}
+.d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.36s}.d4{animation-delay:.52s}
 @keyframes up{to{opacity:1;transform:none}}
-.logo img{width:58px;height:58px}
-.brand{font-weight:700;font-size:24px;letter-spacing:.14em;color:var(--acid);margin-top:10px;text-shadow:0 0 22px rgba(198,255,46,.35)}
-.tag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-top:5px}
-.prayer{background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:18px;padding:22px 26px;margin:26px auto 0;max-width:440px;text-align:left;box-shadow:7px 7px 0 #000;position:relative}
-.prayer:after{content:"";position:absolute;left:46px;bottom:-15px;border:9px solid transparent;border-top-color:#000;border-bottom:0}
-.prayer .k{font-size:11px;font-weight:700;letter-spacing:.2em;color:#6b6b60}
-.prayer p{font-family:"Fraunces",Georgia,serif;font-size:17px;line-height:1.72;margin-top:8px}
-.line{font-size:14px;color:var(--dim);line-height:1.7;max-width:440px;margin:22px auto 0}
-.enter{display:inline-block;background:var(--acid);color:#0a0c0e;font-weight:700;font-size:15px;letter-spacing:.1em;padding:16px 44px;border:3px solid #000;box-shadow:6px 6px 0 #000;text-decoration:none;text-transform:uppercase;margin-top:24px;transition:transform .12s,box-shadow .12s}
-.enter:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #000}
-.enter:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #000}
-.coin{font-size:12.5px;color:var(--faint);line-height:1.7;max-width:440px;margin:20px auto 0}
+.prayer{background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:18px;padding:28px 32px;max-width:560px;box-shadow:8px 8px 0 #000;position:relative}
+.prayer:after{content:"";position:absolute;left:52px;bottom:-17px;border:10px solid transparent;border-top-color:#000;border-bottom:0}
+.prayer .k{font-size:13px;font-weight:700;letter-spacing:.2em;color:#6b6b60}
+.prayer p{font-family:"Fraunces",Georgia,serif;font-size:21px;line-height:1.75;margin-top:10px}
+.line{font-size:17px;color:var(--dim);line-height:1.75;max-width:560px;margin-top:28px}
+.enter{display:inline-block;background:var(--acid);color:#0a0c0e;font-weight:700;font-size:17px;letter-spacing:.1em;padding:19px 52px;border:3px solid #000;box-shadow:7px 7px 0 #000;text-decoration:none;text-transform:uppercase;margin-top:30px;transition:transform .12s,box-shadow .12s;align-self:flex-start}
+.enter:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 #000}
+.coin{font-size:14.5px;color:var(--faint);line-height:1.7;max-width:560px;margin-top:24px}
 .coin a{color:var(--acid);text-decoration:none;border-bottom:1px solid rgba(198,255,46,.4)}
-
-.doc{position:relative;text-align:center;cursor:pointer}
-.doc img{display:block;width:100%;max-width:330px;height:auto;margin:0 auto;border:3px solid #000;box-shadow:8px 8px 0 #000;background:#0d1116;animation:sway 7s ease-in-out infinite;transform-origin:50% 100%}
-@keyframes sway{0%,100%{transform:rotate(1.4deg)}50%{transform:rotate(-1.2deg)}}
-.sound{position:absolute;left:50%;bottom:18px;transform:translateX(-50%) rotate(-2deg);background:#f4c542;color:#0b0d0f;border:2px solid #000;box-shadow:3px 3px 0 #000;font-size:11px;font-weight:700;letter-spacing:.12em;padding:7px 14px;text-transform:uppercase;white-space:nowrap}
-.sound.beg{animation:pulse 1.6s ease-out infinite}
-
-footer{position:relative;z-index:2;text-align:center;padding:10px 16px 26px}
-.socials{display:flex;justify-content:center;gap:22px;margin-bottom:12px}
-.socials a{color:var(--dim);font-size:12px;font-weight:500;letter-spacing:.14em;text-decoration:none;text-transform:uppercase}
+.socials{display:flex;gap:24px;margin-top:34px}
+.socials a{color:var(--dim);font-size:13.5px;font-weight:500;letter-spacing:.14em;text-decoration:none;text-transform:uppercase}
 .socials a:hover{color:var(--acid)}
-.legal{font-size:10px;letter-spacing:.24em;color:#4d555d;text-transform:uppercase}
+.legal{font-size:11px;letter-spacing:.24em;color:#4d555d;text-transform:uppercase;margin-top:14px}
+.right{position:relative;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:520px}
+.right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;animation:zoom 26s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+.flick{position:absolute;inset:0;background:rgba(198,255,46,.05);opacity:0;animation:flick 9s linear infinite;pointer-events:none}
+@keyframes flick{0%,92%,100%{opacity:0}94%{opacity:1}96%{opacity:0}98%{opacity:.7}}
 
+.appwrap{position:fixed;z-index:9;top:50%;left:50%;width:min(72vw,760px);transform:translate(-50%,-50%) scale(.1) rotate(-14deg);opacity:0;transition:all .95s cubic-bezier(.34,1.4,.4,1);cursor:pointer}
+.appwrap.pop{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-1.5deg)}
+.appwrap.dock{top:86px;left:auto;right:16px;width:min(34vw,240px);transform:rotate(4deg);opacity:1}
+.appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116}
+.bubble{position:fixed;z-index:9;top:calc(86px + 15vw);right:20px;max-width:250px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:14px;box-shadow:5px 5px 0 #000;padding:12px 14px;transform:scale(0);transform-origin:80% 0;transition:transform .5s cubic-bezier(.34,1.7,.4,1);cursor:pointer}
+.bubble.show{transform:scale(1) rotate(-1deg)}
+.bubble:before{content:"";position:absolute;right:34px;top:-14px;border:8px solid transparent;border-bottom-color:#000;border-top:0}
+.bubble .s{font-size:10px;font-weight:700;letter-spacing:.18em;color:#6b6b60;text-transform:uppercase}
+.bubble .m{font-family:"Fraunces",Georgia,serif;font-size:15px;line-height:1.5;margin-top:4px}
+.bubble .go{display:inline-block;margin-top:8px;background:var(--acid);border:2px solid #000;box-shadow:3px 3px 0 #000;color:#0a0c0e;font-weight:700;font-size:11px;letter-spacing:.1em;padding:7px 12px;text-transform:uppercase;text-decoration:none}
+.bubble.beg{animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:5px 5px 0 #000,0 0 0 0 rgba(198,255,46,.55)}70%{box-shadow:5px 5px 0 #000,0 0 0 16px rgba(198,255,46,0)}100%{box-shadow:5px 5px 0 #000}}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:12px;margin-right:6px;vertical-align:-1px}
+.eq span{width:3px;background:#0a0c0e;animation:eqb 0.9s ease-in-out infinite}
+.eq span:nth-child(2){animation-delay:.15s}.eq span:nth-child(3){animation-delay:.3s}.eq span:nth-child(4){animation-delay:.45s}
+@keyframes eqb{0%,100%{height:4px}50%{height:12px}}
 @media(max-width:880px){
-  .grid{grid-template-columns:1fr;gap:36px;padding-top:26px}
-  .doc img{max-width:260px}
-  .rxpill code{font-size:10px}
+  .grid{grid-template-columns:1fr}
+  .right{min-height:70vw;border-left:0;border-top:3px solid #000;order:-1}
+  .left{padding:36px 7vw 44px}
+  .prayer p{font-size:18px}
+  .cawrap code{font-size:10.5px}
+  .cawrap .lab{display:none}
+  .appwrap.dock{width:38vw;top:78px;right:10px}
+  .bubble{top:calc(78px + 26vw);right:12px;max-width:210px}
 }
 </style>
 </head>
 <body>
 <div class="stage">
-  <div class="bg"></div><div class="fade"></div><div class="dots"></div>
-
-  <div class="rxbar up d1">
-    <div class="rxpill"><b>Rx</b> <span>CA</span> <code id="ca">PASTE-CA-HERE</code></div>
-    <button class="copy" id="copyca" type="button">Copy</button>
+  <div class="bar">
+    <div class="corner">
+      <img src="/logo.png?v=3" alt="APESONUS">
+      <div><div class="b">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
+    </div>
+    <div class="cawrap">
+      <span class="lab">Rx</span>
+      <code id="ca">PASTE-CA-HERE</code>
+      <button class="copy" id="copyca" type="button">Copy</button>
+    </div>
   </div>
 
   <div class="grid">
-    <div class="col">
-      <div class="logo up d2"><img src="/logo.png?v=3" alt="APESONUS"><div class="brand">APESONUS</div><div class="tag">The entertainment clinic for crypto degeneracy</div></div>
-      <div class="prayer up d3">
+    <div class="left">
+      <div class="dots"></div>
+      <div class="prayer up d1">
         <div class="k">THE DEGEN'S PRAYER</div>
         <p>Onus, I bought the top again.<br>
         Grant me one banger before this candle closes.<br>
         Forgive my leverage, as I forgive the dev who rugged me.<br>
         Amen.</p>
       </div>
-      <p class="line up d4">Real therapy is $200 an hour and your therapist has never held a bag to zero. Ours is $1 a day and the whole staff lives on the chart with you.</p>
-      <div class="up d5">
-        <a class="enter" href="https://music.apesonus.com">Enter clinic</a>
-        <p class="coin">$ONUS is the coin of the congregation. <a href="https://music.apesonus.com/onus">Hold it</a> in solidarity with every degen who made this movement possible.</p>
+      <p class="line up d2">Real therapy is $200 an hour and your therapist has never held a bag to zero. Ours is $1 a day and the whole staff lives on the chart with you.</p>
+      <a class="enter up d3" href="https://music.apesonus.com">Enter clinic</a>
+      <p class="coin up d3">$ONUS is the coin of the congregation. <a href="https://music.apesonus.com/onus">Hold it</a> in solidarity with every degen who made this movement possible.</p>
+      <div class="socials up d4">
+        <a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a>
+        <a href="https://t.me/ApeSonus" target="_blank" rel="noopener">Telegram</a>
       </div>
+      <div class="legal up d4">Unlicensed · Unbothered · Not financial advice</div>
     </div>
-    <div class="doc up d3" id="doc">
-      <img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" fetchpriority="high">
-      <span class="sound" id="sound">Sound on · 15s</span>
-      <audio id="therapy" src="/therapy.mp3" preload="auto"></audio>
+
+    <div class="right">
+      <img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist">
+      <div class="flick"></div>
     </div>
   </div>
-
-  <footer>
-    <div class="socials up d5">
-      <a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a>
-      <a href="https://t.me/ApeSonus" target="_blank" rel="noopener">Telegram</a>
-    </div>
-    <div class="legal">Unlicensed · Unbothered · Not financial advice</div>
-  </footer>
 </div>
+
+<div class="appwrap" id="app" title="Tap for sound"><img src="/comic/app-shot.webp" alt="The clinic, live right now"></div>
+<div class="bubble" id="bubble">
+  <div class="s">Now playing</div>
+  <div class="m"><span class="eq" id="eq"><span></span><span></span><span></span><span></span></span><b id="tname"></b> · <span id="tartist"></span></div>
+  <a class="go" href="https://music.apesonus.com">Click for more</a>
+</div>
+<audio id="track" preload="auto"></audio>
 
 <script>
 (function(){
@@ -138,15 +158,31 @@ footer{position:relative;z-index:2;text-align:center;padding:10px 16px 26px}
   if(ca.textContent.indexOf('PASTE')===0){ca.textContent='CA POSTED SOON';btn.style.display='none'}
   else{btn.addEventListener('click',function(){navigator.clipboard.writeText(ca.textContent.trim()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)})})}
 
-  var a=document.getElementById('therapy'),badge=document.getElementById('sound'),doc=document.getElementById('doc'),dead=false;
-  a.addEventListener('error',function(){badge.style.display='none';dead=true});
-  function show(playing){badge.textContent=playing?'Playing · tap to stop':'Sound on · 15s';badge.classList.remove('beg')}
-  function tryPlay(){if(dead)return;a.currentTime=0;a.play().then(function(){show(true)}).catch(function(){badge.classList.add('beg')})}
-  a.addEventListener('ended',function(){show(false)});
-  doc.addEventListener('click',function(){if(dead)return;if(a.paused){tryPlay()}else{a.pause();show(false)}});
-  var once=function(){if(!dead&&a.paused&&badge.classList.contains('beg'))tryPlay();document.removeEventListener('pointerdown',once)};
+  var TRACKS=[
+    {src:"https://apesonus-audio.b-cdn.net/music/satosheek/ape_first.mp3",title:"APE FIRST",artist:"Satosheek"}
+  ];
+  var pick=TRACKS[Math.floor(Math.random()*TRACKS.length)];
+  var app=document.getElementById('app'),bubble=document.getElementById('bubble'),a=document.getElementById('track'),eq=document.getElementById('eq');
+  a.src=pick.src;
+  document.getElementById('tname').textContent=pick.title;
+  document.getElementById('tartist').textContent=pick.artist;
+  var CAP=15;
+  function eqOn(on){eq.style.visibility=on?'visible':'hidden'}
+  eqOn(false);
+  a.addEventListener('timeupdate',function(){if(a.currentTime>=CAP){a.pause();a.currentTime=0;eqOn(false)}});
+  a.addEventListener('ended',function(){eqOn(false)});
+  function tryPlay(){
+    a.currentTime=0;
+    a.play().then(function(){eqOn(true);bubble.classList.remove('beg');document.getElementById('bstate').textContent='Now playing'}).catch(function(){bubble.classList.add('beg');document.getElementById('bstate').textContent='Tap for sound'});
+  }
+  bubble.querySelector('.s').id='bstate';
+  setTimeout(function(){app.classList.add('pop')},350);
+  setTimeout(function(){app.classList.remove('pop');app.classList.add('dock')},1900);
+  setTimeout(function(){bubble.classList.add('show');tryPlay()},2650);
+  function toggle(){if(a.paused){tryPlay()}else{a.pause();eqOn(false);document.getElementById('bstate').textContent='Paused'}}
+  app.addEventListener('click',toggle);
+  var once=function(){if(a.paused&&bubble.classList.contains('beg'))tryPlay();document.removeEventListener('pointerdown',once)};
   document.addEventListener('pointerdown',once);
-  tryPlay();
 })();
 </script>
 </body>
