@@ -75,22 +75,25 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
 .flick{position:absolute;inset:0;background:rgba(198,255,46,.05);opacity:0;animation:flick 9s linear infinite;pointer-events:none}
 @keyframes flick{0%,92%,100%{opacity:0}94%{opacity:1}96%{opacity:0}98%{opacity:.7}}
 
-.appwrap{position:fixed;z-index:9;top:50%;left:50%;width:min(72vw,760px);transform:translate(-50%,-50%) scale(.1) rotate(-14deg);opacity:0;transition:all .95s cubic-bezier(.34,1.4,.4,1);cursor:pointer}
+.appwrap{position:fixed;z-index:9;top:50%;left:50%;width:min(72vw,760px);transform:translate(-50%,-50%) scale(.1) rotate(-14deg);opacity:0;transition:all .95s cubic-bezier(.34,1.4,.4,1)}
 .appwrap.pop{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-1.5deg)}
-.appwrap.dock{top:86px;left:auto;right:16px;width:min(34vw,240px);transform:rotate(4deg);opacity:1}
-.appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116}
-.bubble{position:fixed;z-index:9;top:calc(86px + 15vw);right:20px;max-width:250px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:14px;box-shadow:5px 5px 0 #000;padding:12px 14px;transform:scale(0);transform-origin:80% 0;transition:transform .5s cubic-bezier(.34,1.7,.4,1);cursor:pointer}
-.bubble.show{transform:scale(1) rotate(-1deg)}
-.bubble:before{content:"";position:absolute;right:34px;top:-14px;border:8px solid transparent;border-bottom-color:#000;border-top:0}
-.bubble .s{font-size:10px;font-weight:700;letter-spacing:.18em;color:#6b6b60;text-transform:uppercase}
-.bubble .m{font-family:"Fraunces",Georgia,serif;font-size:15px;line-height:1.5;margin-top:4px}
-.bubble .go{display:inline-block;margin-top:8px;background:var(--acid);border:2px solid #000;box-shadow:3px 3px 0 #000;color:#0a0c0e;font-weight:700;font-size:11px;letter-spacing:.1em;padding:7px 12px;text-transform:uppercase;text-decoration:none}
-.bubble.beg{animation:pulse 1.6s ease-out infinite}
-@keyframes pulse{0%{box-shadow:5px 5px 0 #000,0 0 0 0 rgba(198,255,46,.55)}70%{box-shadow:5px 5px 0 #000,0 0 0 16px rgba(198,255,46,0)}100%{box-shadow:5px 5px 0 #000}}
-.eq{display:inline-flex;gap:2px;align-items:flex-end;height:12px;margin-right:6px;vertical-align:-1px}
-.eq span{width:3px;background:#0a0c0e;animation:eqb 0.9s ease-in-out infinite}
-.eq span:nth-child(2){animation-delay:.15s}.eq span:nth-child(3){animation-delay:.3s}.eq span:nth-child(4){animation-delay:.45s}
+.appwrap.dock{top:84px;left:auto;right:18px;width:min(32vw,330px);transform:rotate(3deg);opacity:1}
+.appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
+.player{margin-top:20px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
+.player.show{transform:scale(1) rotate(-1.4deg)}
+.player:before{content:"";position:absolute;right:38px;top:-14px;border:8px solid transparent;border-bottom-color:#000;border-top:0}
+.player .row{display:flex;align-items:center;gap:13px}
+.spk{width:58px;height:58px;flex:none;border-radius:50%;background:var(--acid);border:3px solid #000;box-shadow:3px 3px 0 #000;color:#0b0d0f;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.spk:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.spk.beg{animation:pulse 1.6s ease-out infinite}
+.player .s{font-size:10px;font-weight:700;letter-spacing:.16em;color:#6b6b60;text-transform:uppercase}
+.player .m{font-size:15px;font-weight:500;line-height:1.3;margin-top:3px}
+.eq{display:flex;gap:2px;align-items:flex-end;height:12px;margin-top:6px}
+.eq span{width:3px;height:4px;background:#0b0d0f;animation:eqb .9s ease-in-out infinite;animation-play-state:paused}
+.eq.on span{animation-play-state:running}
+.eq span:nth-child(2){animation-delay:.12s}.eq span:nth-child(3){animation-delay:.26s}.eq span:nth-child(4){animation-delay:.4s}.eq span:nth-child(5){animation-delay:.54s}
 @keyframes eqb{0%,100%{height:4px}50%{height:12px}}
+.player .go{display:block;margin-top:11px;padding-top:9px;border-top:2px solid #000;text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#0b0d0f;text-transform:uppercase;text-decoration:none}
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
   .right{min-height:70vw;border-left:0;border-top:3px solid #000;order:-1}
@@ -98,8 +101,10 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   .prayer p{font-size:18px}
   .cawrap code{font-size:10.5px}
   .cawrap .lab{display:none}
-  .appwrap.dock{width:38vw;top:78px;right:10px}
-  .bubble{top:calc(78px + 26vw);right:12px;max-width:210px}
+  .appwrap.dock{width:44vw;top:76px;right:10px}
+  .player{margin-top:14px;padding:11px 12px}
+  .spk{width:50px;height:50px}
+  .player .m{font-size:13.5px}
 }
 </style>
 </head>
@@ -144,11 +149,21 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   </div>
 </div>
 
-<div class="appwrap" id="app" title="Tap for sound"><img src="/comic/app-shot.webp" alt="The clinic, live right now"></div>
-<div class="bubble" id="bubble">
-  <div class="s">Now playing</div>
-  <div class="m"><span class="eq" id="eq"><span></span><span></span><span></span><span></span></span><b id="tname"></b> · <span id="tartist"></span></div>
-  <a class="go" href="https://music.apesonus.com">Click for more</a>
+<div class="appwrap" id="app">
+  <img src="/comic/app-shot.webp" alt="The clinic, live right now" id="shot">
+  <div class="player" id="player">
+    <div class="row">
+      <button class="spk" id="spk" type="button" aria-label="Play the clip">
+        <svg id="ico" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+      <div>
+        <div class="s" id="bstate">Now playing in the clinic</div>
+        <div class="m"><b id="tname"></b> &middot; <span id="tartist"></span></div>
+        <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
+  </div>
 </div>
 <audio id="track" preload="auto"></audio>
 
@@ -159,29 +174,50 @@ body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui
   else{btn.addEventListener('click',function(){navigator.clipboard.writeText(ca.textContent.trim()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)})})}
 
   var TRACKS=[
-    {src:"https://apesonus-audio.b-cdn.net/music/satosheek/ape_first.mp3",title:"APE FIRST",artist:"Satosheek"}
+    {src:"https://apesonus-images.b-cdn.net/images-rekterapy/ape_first.mp3",title:"APE FIRST",artist:"Satosheek"}
   ];
   var pick=TRACKS[Math.floor(Math.random()*TRACKS.length)];
-  var app=document.getElementById('app'),bubble=document.getElementById('bubble'),a=document.getElementById('track'),eq=document.getElementById('eq');
-  a.src=pick.src;
+  var app=document.getElementById('app'),player=document.getElementById('player'),shot=document.getElementById('shot');
+  var a=document.getElementById('track'),eq=document.getElementById('eq'),spk=document.getElementById('spk');
+  var ico=document.getElementById('ico'),state=document.getElementById('bstate');
+  var PLAY='<path d="M8 5v14l11-7z" fill="currentColor"/>';
+  var PAUSE='<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>';
+  var CAP=15,dead=false;
+
   document.getElementById('tname').textContent=pick.title;
   document.getElementById('tartist').textContent=pick.artist;
-  var CAP=15;
-  function eqOn(on){eq.style.visibility=on?'visible':'hidden'}
-  eqOn(false);
-  a.addEventListener('timeupdate',function(){if(a.currentTime>=CAP){a.pause();a.currentTime=0;eqOn(false)}});
-  a.addEventListener('ended',function(){eqOn(false)});
-  function tryPlay(){
-    a.currentTime=0;
-    a.play().then(function(){eqOn(true);bubble.classList.remove('beg');document.getElementById('bstate').textContent='Now playing'}).catch(function(){bubble.classList.add('beg');document.getElementById('bstate').textContent='Tap for sound'});
+  a.src=pick.src;
+
+  function paint(playing){
+    ico.innerHTML=playing?PAUSE:PLAY;
+    eq.classList.toggle('on',playing);
+    spk.classList.remove('beg');
+    state.textContent=playing?'Now playing in the clinic':'Press play';
   }
-  bubble.querySelector('.s').id='bstate';
+  paint(false);
+
+  a.addEventListener('error',function(){dead=true;player.querySelector('.row').style.display='none';state.textContent='';});
+  a.addEventListener('timeupdate',function(){if(a.currentTime>=CAP){a.pause();a.currentTime=0;paint(false)}});
+  a.addEventListener('ended',function(){paint(false)});
+  a.addEventListener('pause',function(){if(!a.ended)paint(false)});
+  a.addEventListener('play',function(){paint(true)});
+
+  function start(){
+    if(dead)return;
+    if(a.currentTime>=CAP)a.currentTime=0;
+    var p=a.play();
+    if(p&&p.catch)p.catch(function(){spk.classList.add('beg');state.textContent='Press play'});
+  }
+  function toggle(){if(dead)return;if(a.paused){start()}else{a.pause()}}
+
+  spk.addEventListener('click',toggle);
+  shot.addEventListener('click',toggle);
+
   setTimeout(function(){app.classList.add('pop')},350);
   setTimeout(function(){app.classList.remove('pop');app.classList.add('dock')},1900);
-  setTimeout(function(){bubble.classList.add('show');tryPlay()},2650);
-  function toggle(){if(a.paused){tryPlay()}else{a.pause();eqOn(false);document.getElementById('bstate').textContent='Paused'}}
-  app.addEventListener('click',toggle);
-  var once=function(){if(a.paused&&bubble.classList.contains('beg'))tryPlay();document.removeEventListener('pointerdown',once)};
+  setTimeout(function(){player.classList.add('show');start()},2650);
+
+  var once=function(){if(!dead&&a.paused&&spk.classList.contains('beg'))start();document.removeEventListener('pointerdown',once)};
   document.addEventListener('pointerdown',once);
 })();
 </script>
