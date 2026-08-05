@@ -104,7 +104,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 
 .right{position:relative;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:560px}
 .kb{position:absolute;inset:-30px;will-change:transform}
-.kb img{width:100%;height:110%;margin-top:-10%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.14)}
+.kb img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.14)}
 .kb img.in{animation:reveal 1.5s cubic-bezier(.33,1,.68,1) forwards}
 @keyframes reveal{to{opacity:1;transform:scale(1)}}
 .kb img.live{opacity:1;animation:ken 30s ease-in-out infinite alternate}
@@ -116,11 +116,11 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 .flick.live{animation:flick 11s linear infinite}
 @keyframes flick{0%,93%,100%{opacity:0}94.5%{opacity:1}96%{opacity:0}97.5%{opacity:.6}}
 
-.appwrap{position:fixed;z-index:20;top:auto;bottom:26px;right:18px;width:min(31vw,320px);opacity:0;transform:rotate(3deg);transition:transform 1s cubic-bezier(.33,1,.68,1),opacity .55s ease;will-change:transform,opacity;backface-visibility:hidden}
+.appwrap{position:fixed;z-index:20;top:10px;right:14px;width:min(30vw,300px);opacity:0;transition:opacity .55s ease;will-change:opacity}
 .appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
-.player{margin-top:20px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
+.player{margin-top:0;cursor:pointer;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
 .player.show{transform:scale(1) rotate(-1.4deg)}
-.player:before{content:"";position:absolute;right:38px;top:-14px;border:8px solid transparent;border-bottom-color:#000;border-top:0}
+
 .player .row{display:flex;align-items:center;gap:13px}
 .spk{width:56px;height:56px;flex:none;border-radius:50%;background:var(--acid);border:3px solid #000;box-shadow:3px 3px 0 #000;color:#0b0d0f;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .spk:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
@@ -138,14 +138,14 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
   .right{min-height:112vw;border-left:0;border-top:3px solid #000;order:-1}
-  .kb img{object-position:22% top;height:108%;margin-top:-8%}
+  .kb img{object-position:22% top}
   .left{padding:34px 7vw 44px}
   h1{font-size:clamp(32px,9vw,52px);min-height:0}
   .lede{font-size:15.5px}
   .prayer p{font-size:15px}
   .cawrap .lab{display:none}
   .pill{font-size:10.5px}
-  .appwrap{width:40vw;top:auto;bottom:14px;right:8px}
+  .appwrap{width:auto;top:auto;bottom:10px;left:10px;right:10px}
   .player{margin-top:14px;padding:11px 12px}
   .spk{width:48px;height:48px}
   .player .m{font-size:13.5px}
@@ -210,7 +210,6 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 </div>
 
 <div class="appwrap" id="app">
-  <img src="/comic/app-shot-v2.webp" width="900" height="498" alt="The clinic, live right now" id="shot" decoding="async">
   <div class="player" id="player">
     <div class="row">
       <button class="spk" id="spk" type="button" aria-label="Play the clip">
@@ -237,7 +236,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 
   var TRACKS=[{src:"/ape-first.mp3",title:"APE FIRST",artist:"Satosheek"}];
   var pick=TRACKS[Math.floor(Math.random()*TRACKS.length)];
-  var app=document.getElementById('app'),player=document.getElementById('player'),shot=document.getElementById('shot');
+  var app=document.getElementById('app'),player=document.getElementById('player');
   var a=document.getElementById('track'),eq=document.getElementById('eq'),spk=document.getElementById('spk');
   var ico=document.getElementById('ico'),state=document.getElementById('bstate');
   var PLAY='<path d="M8 5v14l11-7z" fill="currentColor"/>';
@@ -264,13 +263,13 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
     if(p&&p.catch)p.catch(function(){want=false;spk.classList.add('beg');state.textContent='Press play'});
   }
   function toggle(){if(dead)return;if(a.paused){start()}else{want=false;a.pause()}}
+  player.addEventListener('click',function(e){if(e.target.closest('a'))return;toggle()});
   a.addEventListener('error',function(){dead=true;player.querySelector('.row').style.display='none';state.textContent=''});
   a.addEventListener('canplay',function(){if(want&&a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}});
   a.addEventListener('ended',function(){paint(false)});
   a.addEventListener('pause',function(){paint(false)});
   a.addEventListener('play',function(){paint(true)});
   spk.addEventListener('click',toggle);
-  shot.addEventListener('click',toggle);
 
   var eyebrow=document.getElementById('eyebrow'),typed=document.getElementById('typed');
   var cur=document.getElementById('cur'),dot=document.getElementById('dot'),doc=document.getElementById('doc');
@@ -285,14 +284,6 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
       setTimeout(function(){document.getElementById(id).classList.add('in')},i*110);
     });
     setTimeout(function(){enter.classList.add('sweep')},rows.indexOf('r2')*110+320);
-  }
-
-  function measure(){
-    var t=app.style.transform;app.style.transition='none';app.style.transform='none';
-    var r=app.getBoundingClientRect();
-    app.style.transform=t;app.offsetHeight;app.style.transition='';
-    var big=Math.min(window.innerWidth*.7,740);
-    return {dx:Math.round(window.innerWidth/2-(r.left+r.width/2)),dy:Math.round(window.innerHeight/2-(r.top+r.height/2)),s:Math.max(1,big/r.width)};
   }
 
   function ambient(){
@@ -329,12 +320,6 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
     }
 
     eyebrow.classList.add('in');
-    var m=measure();
-    var base='translate('+m.dx+'px,'+m.dy+'px) ';
-    app.style.transition='none';
-    app.style.transform=base+'scale(.14) rotate(-14deg)';
-    app.offsetHeight;
-    app.style.transition='';
 
     var i=0;
     function type(){
@@ -351,8 +336,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
     }
     setTimeout(type,320);
 
-    setTimeout(function(){app.style.opacity='1';app.style.transform=base+'scale('+m.s.toFixed(3)+') rotate(-1.5deg)'},2050);
-    setTimeout(function(){app.style.transform='';arm()},3150);
+    setTimeout(function(){app.style.opacity='1';arm()},2600);
     setTimeout(ambient,4250);
     setTimeout(function(){player.classList.add('show')},4300);
     setTimeout(start,4650);
