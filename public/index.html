@@ -95,11 +95,11 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 .socials{display:flex;gap:24px;margin-top:26px}
 .socials a{color:var(--dim);font-size:13px;font-weight:500;letter-spacing:.14em;text-decoration:none;text-transform:uppercase;transition:color .15s}
 .socials a:hover{color:var(--acid)}
-.tok{margin-top:22px;border:2px solid rgba(198,255,46,.22);border-radius:14px;padding:14px 16px;max-width:560px;background:rgba(198,255,46,.035)}
-.tok-h{font-size:10.5px;letter-spacing:3px;color:var(--acid);font-weight:800}
-.tok-row{margin-top:8px;font-size:13px;line-height:1.5;color:#c8cdd4}
+.tok{margin-top:26px;border:2px solid rgba(198,255,46,.25);border-radius:14px;padding:16px 18px;max-width:560px;background:rgba(198,255,46,.04)}
+.tok-h{font-size:11px;letter-spacing:3px;color:var(--acid);font-weight:800}
+.tok-row{margin-top:9px;font-size:13.5px;line-height:1.55;color:#c8cdd4}
 .tok-row b{color:#fff}
-.tok-ca{margin-top:10px;font-size:9.5px;letter-spacing:2.2px;color:#7a828c}
+.tok-ca{margin-top:11px;font-size:10px;letter-spacing:2.5px;color:#7a828c}
 .legal{font-size:11px;letter-spacing:.24em;color:#4d555d;text-transform:uppercase;margin-top:14px}
 
 .right{position:sticky;top:0;height:100svh;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:560px}
@@ -116,7 +116,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 .flick.live{animation:flick 11s linear infinite}
 @keyframes flick{0%,93%,100%{opacity:0}94.5%{opacity:1}96%{opacity:0}97.5%{opacity:.6}}
 
-.appwrap{position:absolute;z-index:12;right:18px;bottom:18px;width:min(26vw,290px);opacity:0;transition:opacity .55s ease;will-change:opacity}
+.appwrap{position:fixed;z-index:32;top:92px;right:18px;width:min(28vw,290px);opacity:0;transition:opacity .55s ease;will-change:opacity}
 .appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
 .player{margin-top:0;cursor:pointer;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
 .player.show{transform:scale(1) rotate(-1.4deg)}
@@ -139,15 +139,15 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
   .grid{grid-template-columns:1fr}
   .right{position:relative;height:auto;min-height:112vw;border-left:0;border-top:3px solid #000;order:-1}
   .left{min-height:0}
+  #verifyca{display:none}
   .kb img{object-position:22% top}
   .left{padding:34px 7vw 44px}
   h1{font-size:clamp(32px,9vw,52px);min-height:0}
   .lede{font-size:15.5px}
   .prayer p{font-size:15px}
   .cawrap .lab{display:none}
-  #verifyca{display:none}
   .pill{font-size:10.5px}
-  .appwrap{width:auto;bottom:10px;left:10px;right:10px}
+  .appwrap{width:auto;top:auto;bottom:10px;left:10px;right:10px}
   .player{margin-top:14px;padding:11px 12px}
   .spk{width:48px;height:48px}
   .player .m{font-size:13.5px}
@@ -167,8 +167,8 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
     <div class="cawrap">
       <span class="lab">Rx</span>
       <span class="pill" id="ca">PASTE-PUMP-MINT-HERE</span>
-      <button class="copy" id="copyca" type="button">Copy</button>
       <a class="copy" id="verifyca" href="https://pump.fun" target="_blank" rel="noopener">Verify $PUMP</a>
+      <button class="copy" id="copyca" type="button">Copy</button>
     </div>
   </div>
 
@@ -188,7 +188,6 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
           Amen.</p>
         </div>
         <p class="coin up" id="r4">The clinic charges in $PUMP because that is what the patients already have on them. Every dollar it takes sits in <a href="https://music.apesonus.com/till">a wallet you can watch</a>.</p>
-
         <div class="tok up" id="r7">
           <div class="tok-h">THE NATIVE CURRENCY OF BAD DECISIONS</div>
           <div class="tok-row">Launching another coin at people already traumatised by coin launches felt medically irresponsible, so we took the one they were holding anyway.</div>
@@ -196,15 +195,12 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
           <div class="tok-row"><b>Pump launches the coin. We treat the holder.</b></div>
           <div class="tok-ca">$PUMP &middot; VERIFY THE OFFICIAL TOKEN BEFORE YOU SEND ANYTHING</div>
         </div>
-        
-        </div>
-        </div>
 
         <div class="socials up" id="r5">
           <a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a>
           <a href="https://t.me/ApeSonus" target="_blank" rel="noopener">Telegram</a>
         </div>
-        <div class="legal up" id="r6">Not affiliated with Pump.fun &middot; Unlicensed &middot; Unbothered &middot; Not financial advice</div>
+        <div class="legal up" id="r6">Not affiliated with Pump.fun · Unlicensed · Unbothered · Not financial advice</div>
       </div>
     </div>
 
@@ -212,26 +208,25 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
       <div class="kb" id="kb" data-depth="20"><img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" id="doc"></div>
       <div class="rim" id="rim"></div>
       <div class="flick" id="flick"></div>
-      <div class="appwrap" id="app">
-        <div class="player" id="player">
-          <div class="row">
-            <button class="spk" id="spk" type="button" aria-label="Play the clip">
-              <svg id="ico" viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-            </button>
-            <div>
-              <div class="s" id="bstate">Now playing in the clinic</div>
-              <div class="m"><b id="tname"></b> &middot; <span id="tartist"></span></div>
-              <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
-            </div>
-          </div>
-          <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
-
+<div class="appwrap" id="app">
+  <div class="player" id="player">
+    <div class="row">
+      <button class="spk" id="spk" type="button" aria-label="Play the clip">
+        <svg id="ico" viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+      <div>
+        <div class="s" id="bstate">Now playing in the clinic</div>
+        <div class="m"><b id="tname"></b> &middot; <span id="tartist"></span></div>
+        <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
+  </div>
+</div>
 <audio id="track" preload="none"></audio>
 
 <script>
