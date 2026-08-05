@@ -104,7 +104,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 
 .right{position:relative;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:560px}
 .kb{position:absolute;inset:-30px;will-change:transform}
-.kb img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.14)}
+.kb img{width:100%;height:110%;margin-top:-10%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.14)}
 .kb img.in{animation:reveal 1.5s cubic-bezier(.33,1,.68,1) forwards}
 @keyframes reveal{to{opacity:1;transform:scale(1)}}
 .kb img.live{opacity:1;animation:ken 30s ease-in-out infinite alternate}
@@ -138,7 +138,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
   .right{min-height:112vw;border-left:0;border-top:3px solid #000;order:-1}
-  .kb img{object-position:22% top}
+  .kb img{object-position:22% top;height:108%;margin-top:-8%}
   .left{padding:34px 7vw 44px}
   h1{font-size:clamp(32px,9vw,52px);min-height:0}
   .lede{font-size:15.5px}
