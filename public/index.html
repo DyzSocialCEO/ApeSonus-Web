@@ -95,6 +95,11 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 .socials{display:flex;gap:24px;margin-top:26px}
 .socials a{color:var(--dim);font-size:13px;font-weight:500;letter-spacing:.14em;text-decoration:none;text-transform:uppercase;transition:color .15s}
 .socials a:hover{color:var(--acid)}
+.tok{margin-top:26px;border:2px solid rgba(198,255,46,.25);border-radius:14px;padding:16px 18px;max-width:560px;background:rgba(198,255,46,.04)}
+.tok-h{font-size:11px;letter-spacing:3px;color:var(--acid);font-weight:800}
+.tok-row{margin-top:9px;font-size:13.5px;line-height:1.55;color:#c8cdd4}
+.tok-row b{color:#fff}
+.tok-ca{margin-top:11px;font-size:10px;letter-spacing:2.5px;color:#7a828c}
 .legal{font-size:11px;letter-spacing:.24em;color:#4d555d;text-transform:uppercase;margin-top:14px}
 
 .right{position:relative;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:560px}
@@ -111,7 +116,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
 .flick.live{animation:flick 11s linear infinite}
 @keyframes flick{0%,93%,100%{opacity:0}94.5%{opacity:1}96%{opacity:0}97.5%{opacity:.6}}
 
-.appwrap{position:fixed;z-index:20;top:84px;right:18px;width:min(31vw,320px);opacity:0;transform:rotate(3deg);transition:transform 1s cubic-bezier(.33,1,.68,1),opacity .55s ease;will-change:transform,opacity;backface-visibility:hidden}
+.appwrap{position:fixed;z-index:20;top:auto;bottom:26px;right:18px;width:min(31vw,320px);opacity:0;transform:rotate(3deg);transition:transform 1s cubic-bezier(.33,1,.68,1),opacity .55s ease;will-change:transform,opacity;backface-visibility:hidden}
 .appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
 .player{margin-top:20px;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
 .player.show{transform:scale(1) rotate(-1.4deg)}
@@ -140,7 +145,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
   .prayer p{font-size:15px}
   .cawrap .lab{display:none}
   .pill{font-size:10.5px}
-  .appwrap{width:40vw;top:74px;right:8px}
+  .appwrap{width:40vw;top:auto;bottom:14px;right:8px}
   .player{margin-top:14px;padding:11px 12px}
   .spk{width:48px;height:48px}
   .player .m{font-size:13.5px}
@@ -179,7 +184,15 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
           Forgive my leverage, as I forgive the dev who rugged me.<br>
           Amen.</p>
         </div>
-        <p class="coin up" id="r4">$ONUS is the coin of the congregation. <a href="https://music.apesonus.com/onus">Hold it</a> in solidarity with every degen who made this movement possible.</p>
+        <p class="coin up" id="r4">$ONUS is the coin of the congregation. The clinic runs on it, The Call pays in it, and the doctor <a href="https://music.apesonus.com/onus">holds his own bags</a>.</p>
+        <div class="tok up" id="r7">
+          <div class="tok-h">THE COIN, ON PAPER</div>
+          <div class="tok-row"><b>1,000,000,000</b> $ONUS. All of it. No presale, no hidden tranche, launched on Raydium&rsquo;s bonding curve.</div>
+          <div class="tok-row">Team wallets are public the day the coin is. Every token the team holds goes toward growing APESONUS. Watch the chain.</div>
+          <div class="tok-row">Prizes for The Call are bought on the open market, never minted. Winning creates buys.</div>
+          <div class="tok-ca">CA · POSTED AT LAUNCH</div>
+        </div>
+
         <div class="socials up" id="r5">
           <a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a>
           <a href="https://t.me/ApeSonus" target="_blank" rel="noopener">Telegram</a>
@@ -265,7 +278,7 @@ h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercas
   var dots=document.getElementById('dots'),grain=document.getElementById('grain'),col=document.getElementById('col');
   var enter=document.getElementById('r2');
   var LINE='YOU HAVE CRYPTO DEGENERACY';
-  var rows=['r1','r2','r3','r4','r5','r6'];
+  var rows=['r1','r2','r3','r4','r7','r5','r6'];
 
   function reveal(){
     rows.forEach(function(id,i){
