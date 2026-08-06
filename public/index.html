@@ -152,16 +152,46 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   .player{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
+  .glow,.sheet.landed,.s1 h1 .live .dot,.enter,.barcode:after,.tape:after{animation:none}
   .dots,.rim,.flick,.enter:after,.spkbtn.beg{animation:none}
   .right img{animation:none}
   .sheet{animation:none;opacity:1;transform:none}
   .stamp{animation:none;opacity:.92;transform:rotate(-5deg)}
   .grain{animation:none}
 }
+
+/* ambient glow that slowly wanders behind the case file */
+.glow{position:fixed;z-index:0;width:60vw;height:60vw;left:-12vw;top:8vh;pointer-events:none;background:radial-gradient(circle,rgba(198,255,46,.075),transparent 62%);filter:blur(10px);animation:wander 26s ease-in-out infinite alternate}
+@keyframes wander{0%{transform:translate(0,0) scale(1)}50%{transform:translate(9vw,10vh) scale(1.12)}100%{transform:translate(2vw,-6vh) scale(.95)}}
+/* every sheet breathes on its own slow phase after landing */
+.sheet.landed{opacity:1;animation:floaty var(--fd,9s) ease-in-out var(--fp,0s) infinite alternate}
+@keyframes floaty{from{transform:translateY(0) rotate(var(--r,0deg))}to{transform:translateY(-4px) rotate(var(--r,0deg))}}
+.sheet.landed:hover{animation-play-state:paused;transform:translateY(-3px) rotate(var(--r,0deg))}
+.s1.landed{--fd:10s;--fp:0s}
+.s2.landed{--fd:8s;--fp:1.6s}
+.s3.landed{--fd:11s;--fp:3.1s}
+/* the acid full stop keeps a slow monitor blip forever */
+.s1 h1 .live .dot{animation:blip 2.6s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.35}}
+/* enter clinic idles with a soft glow breath under the shine sweep */
+.enter{animation:btnbreathe 4.5s ease-in-out infinite}
+@keyframes btnbreathe{0%,100%{box-shadow:7px 7px 0 #000,0 0 0 rgba(198,255,46,0)}50%{box-shadow:7px 7px 0 #000,0 0 26px rgba(198,255,46,.28)}}
+/* barcode scanner shimmer */
+.barcode{position:relative;overflow:hidden}
+.barcode:after{content:"";position:absolute;top:0;bottom:0;width:34px;left:-20%;background:linear-gradient(90deg,transparent,rgba(198,255,46,.5),transparent);animation:scanbar 5.5s 2.5s ease-in-out infinite}
+@keyframes scanbar{0%{left:-20%}45%{left:110%}100%{left:110%}}
+/* tape catches light */
+.tape{overflow:hidden}
+.tape:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-110%);animation:tapeshine 8s 4s ease-in-out infinite}
+@keyframes tapeshine{0%{transform:translateX(-110%)}30%{transform:translateX(110%)}100%{transform:translateX(110%)}}
+/* mouse parallax layers move by CSS vars set in JS, on top of their own animations via wrappers */
+.pl{transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
+
 </style>
 </head>
 <body>
 <div class="dots" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
 <div class="grain"></div>
 
 <div class="bar">
@@ -181,7 +211,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 
     <div class="sheet s1 anton" style="animation-delay:.1s">
       <div class="stamp">Diagnosis</div>
-      <div class="formline"><span>APESONUS</span><b>·</b><span>The entertainment clinic for crypto degeneracy</span></div>
       <div class="pad">
         <h1><span class="ghost">YOU HAVE CRYPTO DEGENERACY<span class="dot">.</span></span><span class="live"><span class="typed" id="typed"></span><span class="dot" id="livedot">.</span></span></h1>
         <p class="lede" style="font-family:Archivo">There is no cure. There is a soundtrack. <b>Real therapy is $200 an hour</b> and your therapist has never held a bag to zero. Ours is <b>one dollar a day, paid in $PUMP</b>, and the whole staff lives on the chart with you.</p>
@@ -213,7 +242,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   </div>
 
   <div class="right">
-    <img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist">
+    <div class="pl" id="plDoc" style="width:100%;height:100%"><img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%"></div>
     <div class="rim"></div>
     <div class="flick" aria-hidden="true"></div>
     <div class="clip">RESIDENT · UNLICENSED</div>
@@ -272,6 +301,25 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
     document.removeEventListener('pointerdown',firstTap);
   }
   document.addEventListener('pointerdown',firstTap);
+})();
+</script>
+<script>
+(function(){
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.sheet').forEach(function(sh){
+    sh.addEventListener('animationend',function(e){ if(e.animationName==='drop') sh.classList.add('landed'); });
+  });
+  if(rm)return;
+  var doc=document.getElementById('plDoc');
+  var raf=null;
+  document.addEventListener('mousemove',function(e){
+    if(raf)return;
+    raf=requestAnimationFrame(function(){
+      raf=null;
+      var x=(e.clientX/innerWidth-0.5), y=(e.clientY/innerHeight-0.5);
+      if(doc)doc.style.transform='translate('+(x*-10)+'px,'+(y*-8)+'px) scale(1.03)';
+    });
+  });
 })();
 </script>
 </body>
