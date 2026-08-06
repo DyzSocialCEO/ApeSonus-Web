@@ -37,6 +37,8 @@
 <style>
 :root{--acid:#c6ff2e;--red:#e5484d;--ink:#07090b;--sheet:#101317;--sheet2:#0c0f13;--line:#20262e;--txt:#e9edf0;--dim:#8a939d;--tape:rgba(198,255,46,.14)}
 *{box-sizing:border-box;margin:0;padding:0}
+.dots{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;background-image:radial-gradient(rgba(198,255,46,.08) 1px,transparent 1.6px);background-size:28px 28px;animation:drift 70s linear infinite}
+@keyframes drift{from{background-position:0 0}to{background-position:0 560px}}
 html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,system-ui,sans-serif;overflow-x:clip}
 .anton{font-family:Anton,Impact,sans-serif;font-weight:400}
 .mono{font-family:"Space Mono",ui-monospace,monospace}
@@ -47,8 +49,8 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;background:rgba(7,9,11,.85);backdrop-filter:blur(8px);border-bottom:2px solid #000}
 .corner{display:flex;align-items:center;gap:11px}
 .corner img{width:38px;height:38px}
-.corner .b{font-weight:800;letter-spacing:.14em;font-size:15px}
-.corner .t{font-size:10.5px;color:var(--dim);margin-top:1px}
+.corner .b{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.18em;font-size:21px;color:var(--acid);text-shadow:0 0 14px rgba(198,255,46,.45)}
+.corner .t{font-size:11px;color:#aeb6bf;letter-spacing:.04em;margin-top:2px}
 .cawrap{display:flex;align-items:center;gap:8px}
 .lab{font-size:11px;color:var(--acid);border:1px solid var(--acid);padding:3px 7px;border-radius:3px;letter-spacing:.1em}
 .pill{font-family:"Space Mono",monospace;font-size:11.5px;color:#cfe8a0;background:#0d1410;border:1px solid #24391a;padding:6px 12px;border-radius:6px}
@@ -62,13 +64,20 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .right img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;transform:scale(1.05);animation:kb 36s ease-in-out infinite alternate}
 /* polaroid clip frame on the doctor */
 .clip{position:absolute;top:22px;left:22px;z-index:6;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.24em;color:#0a0c0e;background:var(--acid);border:2px solid #000;box-shadow:4px 4px 0 #000;padding:7px 12px;transform:rotate(-2deg)}
-.rim{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 140px rgba(198,255,46,.08)}
+.rim{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 140px rgba(198,255,46,.08);animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:inset 0 0 110px rgba(198,255,46,.07)}50%{box-shadow:inset 0 0 190px rgba(198,255,46,.15)}}
+.flick{position:absolute;inset:0;pointer-events:none;background:rgba(198,255,46,.05);opacity:0;animation:flick 9s linear infinite}
+@keyframes flick{0%,93%,96%,100%{opacity:0}94%{opacity:1}95%{opacity:.3}}
 @keyframes kb{from{transform:scale(1.05) translateY(0)}to{transform:scale(1.1) translateY(-12px)}}
 
 /* THE FILE — every block is a sheet in the folder */
-.sheet{background:var(--sheet);border:2px solid #000;box-shadow:7px 7px 0 #000;position:relative;opacity:0;transform:translateY(26px) rotate(var(--r,0deg));animation:drop .55s cubic-bezier(.2,1.2,.3,1) forwards}
+.sheet{background:var(--sheet);border:2px solid #000;box-shadow:7px 7px 0 #000;position:relative;opacity:0;transform:translateY(16px) rotate(var(--r,0deg));animation:drop .8s cubic-bezier(.22,.9,.24,1) forwards;transition:transform .25s ease,box-shadow .25s ease}
+.sheet:hover{transform:translateY(-3px) rotate(var(--r,0deg));box-shadow:10px 12px 0 #000}
 .sheet+.sheet{margin-top:22px}
 @keyframes drop{to{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}}
+.s1 h1{position:relative}
+.s1 h1 .ghost{visibility:hidden}
+.s1 h1 .live{position:absolute;left:0;top:0;right:0}
 /* hole punches down the left edge */
 .sheet:before{content:"";position:absolute;left:10px;top:18px;bottom:18px;width:8px;background:radial-gradient(circle 4px at 4px 10px,var(--ink) 4px,transparent 5px);background-size:8px 46px;background-repeat:repeat-y}
 .pad{padding:22px 26px 22px 40px}
@@ -89,13 +98,17 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .enter{position:relative;overflow:hidden;display:inline-block;width:max-content;background:var(--acid);color:#0a0c0e;font-weight:800;font-size:16px;letter-spacing:.12em;padding:17px 50px;border:3px solid #000;box-shadow:7px 7px 0 #000;text-decoration:none;text-transform:uppercase;margin-top:26px;transition:transform .13s,box-shadow .13s}
 .enter:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 #000}
 .enter:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #000}
+.enter{overflow:hidden}
+.enter:after{content:"";position:absolute;top:-10%;left:-70%;width:45%;height:120%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:sweep 3.4s 1.6s ease-out infinite}
+@keyframes sweep{0%{left:-70%}26%{left:130%}100%{left:130%}}
 
 /* sheet 2: the prayer, taped in */
-.s2{--r:.8deg;max-width:540px;background:var(--sheet2)}
-.tape{position:absolute;top:-12px;width:86px;height:26px;background:var(--tape);border:1px solid rgba(198,255,46,.25);transform:rotate(-3deg)}
+.s2{--r:.8deg;max-width:540px;background:#f2edda;border-color:#000;color:#14171a}
+.s2:before{background:radial-gradient(circle 4px at 4px 10px,var(--ink) 4px,transparent 5px);background-size:8px 46px;background-repeat:repeat-y}
+.tape{position:absolute;top:-12px;width:86px;height:26px;background:rgba(198,255,46,.30);border:1px solid rgba(140,180,20,.5);transform:rotate(-3deg);backdrop-filter:blur(1px)}
 .tape.tl{left:26px}.tape.tr{right:26px;transform:rotate(4deg)}
-.s2 .k{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--acid);margin-bottom:12px}
-.s2 p{font-size:15.5px;line-height:1.85;font-style:italic;color:#d6dbe1}
+.s2 .k{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3em;color:#6b6f75;margin-bottom:12px;border-bottom:2px solid #14171a;padding-bottom:9px}
+.s2 p{font-size:16px;line-height:1.9;font-style:italic;color:#1b1e22}
 
 /* sheet 3: lab report */
 .s3{--r:-.6deg;max-width:600px}
@@ -116,6 +129,8 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .player{background:#0d1116;border:3px solid #000;box-shadow:8px 8px 0 #000;padding:13px 14px;transform:rotate(-1deg)}
 .row{display:flex;align-items:center;gap:12px;cursor:pointer}
 .spkbtn{width:52px;height:52px;flex:none;border-radius:50%;background:var(--acid);border:3px solid #000;box-shadow:3px 3px 0 #000;color:#0b0d0f;display:flex;align-items:center;justify-content:center}
+.spkbtn.beg{animation:begp 1.7s ease-out infinite}
+@keyframes begp{0%{box-shadow:3px 3px 0 #000,0 0 0 0 rgba(198,255,46,.5)}70%{box-shadow:3px 3px 0 #000,0 0 0 16px rgba(198,255,46,0)}100%{box-shadow:3px 3px 0 #000,0 0 0 0 rgba(198,255,46,0)}}
 .s{font-size:10px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
 .m{font-size:13px;margin-top:3px}
 .eq{display:flex;gap:2.5px;margin-top:6px;height:12px;align-items:flex-end}
@@ -137,6 +152,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   .player{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
+  .dots,.rim,.flick,.enter:after,.spkbtn.beg{animation:none}
   .right img{animation:none}
   .sheet{animation:none;opacity:1;transform:none}
   .stamp{animation:none;opacity:.92;transform:rotate(-5deg)}
@@ -145,12 +161,13 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 </style>
 </head>
 <body>
+<div class="dots" aria-hidden="true"></div>
 <div class="grain"></div>
 
 <div class="bar">
   <div class="corner">
     <img src="/logo.png?v=3" alt="APESONUS">
-    <div><div class="b anton" style="letter-spacing:.16em">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
+    <div><div class="b">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
   </div>
   <div class="cawrap">
     <span class="lab">Rx</span>
@@ -166,7 +183,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       <div class="stamp">Diagnosis</div>
       <div class="formline"><span>APESONUS</span><b>·</b><span>The entertainment clinic for crypto degeneracy</span></div>
       <div class="pad">
-        <h1><span class="typed" id="typed"></span><span class="dot">.</span></h1>
+        <h1><span class="ghost">YOU HAVE CRYPTO DEGENERACY<span class="dot">.</span></span><span class="live"><span class="typed" id="typed"></span><span class="dot" id="livedot">.</span></span></h1>
         <p class="lede" style="font-family:Archivo">There is no cure. There is a soundtrack. <b>Real therapy is $200 an hour</b> and your therapist has never held a bag to zero. Ours is <b>one dollar a day, paid in $PUMP</b>, and the whole staff lives on the chart with you.</p>
         <a class="enter" href="https://music.apesonus.com">Enter clinic</a>
       </div>
@@ -198,6 +215,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   <div class="right">
     <img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist">
     <div class="rim"></div>
+    <div class="flick" aria-hidden="true"></div>
     <div class="clip">RESIDENT · UNLICENSED</div>
     <div class="appwrap">
       <div class="player" id="player">
@@ -220,24 +238,40 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 (function(){
   var LINE='YOU HAVE CRYPTO DEGENERACY', el=document.getElementById('typed'), i=0;
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(rm){el.textContent=LINE;el.classList.add('done');}
-  else (function t(){ if(i<=LINE.length){el.textContent=LINE.slice(0,i);i++;setTimeout(t,38);} else el.classList.add('done'); })();
+  if(rm){el.textContent=LINE;}
+  else (function t(){ if(i<=LINE.length){el.textContent=LINE.slice(0,i);i++;setTimeout(t,38);} })();
 
   var a=document.getElementById('track'),player=document.getElementById('player'),
-      ico=document.getElementById('ico'),bs=document.getElementById('bstate');
+      ico=document.getElementById('ico'),bs=document.getElementById('bstate'),
+      spk=document.querySelector('.spkbtn');
+  var CAP=15;
   function paint(){
     var p=!a.paused;
     player.classList.toggle('playing',p);
+    if(spk)spk.classList.toggle('beg',!p);
     ico.innerHTML=p?'<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>':'<path d="M8 5v14l11-7z" fill="currentColor"/>';
     bs.textContent=p?'Now playing in the clinic':'Press play for the dose';
   }
+  a.addEventListener('timeupdate',function(){ if(a.currentTime>=CAP){a.pause();a.currentTime=0;} });
+  a.addEventListener('error',function(){ if(spk)spk.classList.remove('beg'); });
+  function tryPlay(){
+    try{
+      var p=a.play();
+      if(p&&p.then){p.then(paint).catch(function(){paint();});}else{paint();}
+    }catch(e){paint();}
+  }
   player.addEventListener('click',function(e){
     if(e.target.closest('a'))return;
-    if(a.paused){a.play().catch(function(){});}else{a.pause();}
-    paint();
+    if(a.paused){tryPlay();}else{a.pause();paint();}
   });
   a.addEventListener('play',paint);a.addEventListener('pause',paint);a.addEventListener('ended',paint);
   paint();
+  tryPlay();
+  function firstTap(){
+    if(a.paused) tryPlay();
+    document.removeEventListener('pointerdown',firstTap);
+  }
+  document.addEventListener('pointerdown',firstTap);
 })();
 </script>
 </body>
