@@ -27,332 +27,217 @@
 <meta name="theme-color" content="#07090b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;700;800&family=Space+Mono&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","name":"APESONUS","url":"https://apesonus.com","logo":"https://apesonus.com/logo.png","sameAs":["https://x.com/apesonus","https://t.me/ApeSonus","https://music.apesonus.com"]},
+{"@type":"Organization","name":"APESONUS","url":"https://apesonus.com","logo":"https://apesonus.com/logo.png","sameAs":["https://x.com/apesonus","https://music.apesonus.com"]},
 {"@type":"WebApplication","name":"APESONUS","url":"https://music.apesonus.com","applicationCategory":"MusicApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"1.00","priceCurrency":"USD","description":"24 hours of the whole catalogue for one dollar"}}
 ]}
 </script>
 <style>
-:root{--bg:#07090b;--ink:#e8edf1;--dim:#c7ced4;--faint:#77808a;--acid:#c6ff2e;--paper:#fff7e8;--paper-ink:#0b0d0f}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.stage{min-height:100svh;display:flex;flex-direction:column;position:relative}
+:root{--acid:#c6ff2e;--red:#e5484d;--ink:#07090b;--sheet:#101317;--sheet2:#0c0f13;--line:#20262e;--txt:#e9edf0;--dim:#8a939d;--tape:rgba(198,255,46,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,system-ui,sans-serif;overflow-x:clip}
+.anton{font-family:Anton,Impact,sans-serif;font-weight:400}
+.mono{font-family:"Space Mono",ui-monospace,monospace}
 
-.grain{position:fixed;inset:-150px;z-index:40;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.1s steps(4) infinite}
-@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-40px,20px)}50%{transform:translate(30px,-30px)}75%{transform:translate(-20px,-15px)}100%{transform:translate(25px,25px)}}
-.vig{position:fixed;inset:0;z-index:39;pointer-events:none;background:radial-gradient(ellipse at 42% 45%,transparent 30%,rgba(0,0,0,.55) 100%)}
+.grain{position:fixed;inset:-150px;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr 1.1s steps(4) infinite}
+@keyframes gr{0%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}100%{transform:translate(0,0)}}
 
-.bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(10,13,16,.94);border-bottom:1px solid #1c232b;padding:12px 22px;backdrop-filter:blur(8px)}
+.bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;background:rgba(7,9,11,.85);backdrop-filter:blur(8px);border-bottom:2px solid #000}
 .corner{display:flex;align-items:center;gap:11px}
 .corner img{width:38px;height:38px}
-.corner .b{font-weight:700;font-size:18px;letter-spacing:.12em;color:var(--acid);text-shadow:0 0 18px rgba(198,255,46,.4)}
-.corner .t{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-top:1px}
-.cawrap{display:flex;align-items:center;gap:10px}
-.cawrap .lab{font-family:"Fraunces",serif;font-style:italic;font-size:17px;color:var(--paper)}
-.pill{position:relative;overflow:hidden;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;color:var(--acid);background:#0d1116;border:1px solid #283039;border-radius:6px;padding:8px 12px}
-.pill:after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(198,255,46,.16),transparent);animation:shimmer 5.5s ease-in-out 2.5s infinite}
-@keyframes shimmer{0%{left:-60%}18%{left:130%}100%{left:130%}}
-.copy{background:var(--acid);color:#0a0c0e;border:2px solid #000;box-shadow:3px 3px 0 #000;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.1em;padding:9px 16px;cursor:pointer;text-transform:uppercase}
-.copy:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.corner .b{font-weight:800;letter-spacing:.14em;font-size:15px}
+.corner .t{font-size:10.5px;color:var(--dim);margin-top:1px}
+.cawrap{display:flex;align-items:center;gap:8px}
+.lab{font-size:11px;color:var(--acid);border:1px solid var(--acid);padding:3px 7px;border-radius:3px;letter-spacing:.1em}
+.pill{font-family:"Space Mono",monospace;font-size:11.5px;color:#cfe8a0;background:#0d1410;border:1px solid #24391a;padding:6px 12px;border-radius:6px}
+.copy{font-size:11px;color:var(--dim);border:1px solid var(--line);background:transparent;padding:6px 10px;border-radius:6px;text-decoration:none}
+.copy:hover{color:var(--txt)}
 
-.grid{flex:1;display:grid;grid-template-columns:1.06fr .94fr;align-items:start}
-.left{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:100svh;padding:52px 5vw;overflow:hidden}
-.dots{position:absolute;inset:-40px;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.4px);background-size:14px 14px;pointer-events:none}
-.dots.live{animation:dotdrift 60s linear infinite}
-@keyframes dotdrift{from{background-position:0 0}to{background-position:140px 280px}}
-.col{position:relative;will-change:transform}
+.grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:start;min-height:100svh}
+.left{position:relative;min-height:100svh;padding:112px 4.5vw 70px;display:flex;flex-direction:column;justify-content:center;background:
+  radial-gradient(1200px 600px at 20% 10%,rgba(198,255,46,.04),transparent 60%)}
+.right{position:sticky;top:0;height:100svh;overflow:hidden;border-left:2px solid #000;background:#0a0d10}
+.right img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;transform:scale(1.05);animation:kb 36s ease-in-out infinite alternate}
+/* polaroid clip frame on the doctor */
+.clip{position:absolute;top:22px;left:22px;z-index:6;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.24em;color:#0a0c0e;background:var(--acid);border:2px solid #000;box-shadow:4px 4px 0 #000;padding:7px 12px;transform:rotate(-2deg)}
+.rim{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 140px rgba(198,255,46,.08)}
+@keyframes kb{from{transform:scale(1.05) translateY(0)}to{transform:scale(1.1) translateY(-12px)}}
 
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.32em;color:var(--acid);text-transform:uppercase;opacity:0}
-.eyebrow.in{animation:up .6s cubic-bezier(.2,.7,.2,1) forwards}
-h1{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(38px,4.9vw,74px);line-height:.94;letter-spacing:.005em;margin-top:14px;min-height:2.9em}
-.cur{display:inline-block;width:.5em;height:.86em;background:var(--ink);vertical-align:-6%;margin-left:.06em;animation:blink .9s steps(1) infinite}
-.cur.off{display:none}
-@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-.dot{color:var(--acid);opacity:0}
-.dot.hit{opacity:1;animation:blip 1.1s ease-out}
-@keyframes blip{0%{text-shadow:0 0 0 rgba(198,255,46,0)}20%{text-shadow:0 0 26px rgba(198,255,46,.95)}100%{text-shadow:0 0 10px rgba(198,255,46,.25)}}
+/* THE FILE — every block is a sheet in the folder */
+.sheet{background:var(--sheet);border:2px solid #000;box-shadow:7px 7px 0 #000;position:relative;opacity:0;transform:translateY(26px) rotate(var(--r,0deg));animation:drop .55s cubic-bezier(.2,1.2,.3,1) forwards}
+.sheet+.sheet{margin-top:22px}
+@keyframes drop{to{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}}
+/* hole punches down the left edge */
+.sheet:before{content:"";position:absolute;left:10px;top:18px;bottom:18px;width:8px;background:radial-gradient(circle 4px at 4px 10px,var(--ink) 4px,transparent 5px);background-size:8px 46px;background-repeat:repeat-y}
+.pad{padding:22px 26px 22px 40px}
+.formline{display:flex;gap:10px;align-items:baseline;font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;border-bottom:1px dashed var(--line);padding:12px 26px 10px 40px}
+.formline b{color:var(--acid)}
 
-.up{opacity:0;transform:translateY(20px)}
-.up.in{animation:up .75s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes up{to{opacity:1;transform:none}}
-.lede{font-size:17px;color:var(--dim);line-height:1.72;max-width:520px;margin-top:22px}
-.lede b{color:var(--ink);font-weight:500}
-.enter{position:relative;overflow:hidden;display:inline-block;background:var(--acid);color:#0a0c0e;font-weight:700;font-size:16px;letter-spacing:.1em;padding:18px 48px;border:3px solid #000;box-shadow:7px 7px 0 #000;text-decoration:none;text-transform:uppercase;margin-top:26px;transition:transform .13s,box-shadow .13s}
+/* sheet 1: the diagnosis form */
+.s1{--r:-.4deg;max-width:640px}
+.s1 h1{line-height:.95;font-size:clamp(50px,6.4vw,104px);text-transform:uppercase;margin-top:8px}
+.s1 h1 .dot{color:var(--acid)}
+.typed{border-right:.09em solid var(--acid);white-space:pre-wrap}
+.done{border-right:none}
+.lede{margin-top:18px;font-size:16px;line-height:1.65;color:#c7ced6;max-width:560px}
+.lede b{color:var(--txt)}
+/* the stamp: the word the page already carries */
+.stamp{position:absolute;top:14px;right:18px;font-family:"Space Mono",monospace;font-weight:700;font-size:15px;letter-spacing:.3em;color:var(--red);border:3px double var(--red);border-radius:6px;padding:8px 16px;text-transform:uppercase;transform:rotate(7deg) scale(3);opacity:0;animation:slam .45s .9s cubic-bezier(.3,1.6,.4,1) forwards;mix-blend-mode:screen}
+@keyframes slam{60%{opacity:1;transform:rotate(-5deg) scale(.94)}100%{opacity:.92;transform:rotate(-5deg) scale(1)}}
+.enter{position:relative;overflow:hidden;display:inline-block;width:max-content;background:var(--acid);color:#0a0c0e;font-weight:800;font-size:16px;letter-spacing:.12em;padding:17px 50px;border:3px solid #000;box-shadow:7px 7px 0 #000;text-decoration:none;text-transform:uppercase;margin-top:26px;transition:transform .13s,box-shadow .13s}
 .enter:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 #000}
 .enter:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #000}
-.enter:after{content:"";position:absolute;top:-10%;left:-70%;width:45%;height:120%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent)}
-.enter.sweep:after{animation:sweep .9s ease-out}
-.enter:hover:after{animation:sweep .7s ease-out}
-@keyframes sweep{from{left:-70%}to{left:150%}}
-.prayer{background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;padding:16px 20px;max-width:470px;box-shadow:7px 7px 0 #000;position:relative;margin-top:30px}
-.prayer:after{content:"";position:absolute;left:44px;bottom:-16px;border:9px solid transparent;border-top-color:#000;border-bottom:0}
-.prayer .k{font-size:11px;font-weight:700;letter-spacing:.2em;color:#6b6b60}
-.prayer p{font-family:"Fraunces",Georgia,serif;font-size:16px;line-height:1.65;margin-top:6px}
-.coin{font-size:14px;color:var(--faint);line-height:1.7;max-width:520px;margin-top:26px}
-.coin a{color:var(--acid);text-decoration:none;border-bottom:1px solid rgba(198,255,46,.4)}
-.socials{display:flex;gap:24px;margin-top:26px}
-.socials a{color:var(--dim);font-size:13px;font-weight:500;letter-spacing:.14em;text-decoration:none;text-transform:uppercase;transition:color .15s}
+
+/* sheet 2: the prayer, taped in */
+.s2{--r:.8deg;max-width:540px;background:var(--sheet2)}
+.tape{position:absolute;top:-12px;width:86px;height:26px;background:var(--tape);border:1px solid rgba(198,255,46,.25);transform:rotate(-3deg)}
+.tape.tl{left:26px}.tape.tr{right:26px;transform:rotate(4deg)}
+.s2 .k{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--acid);margin-bottom:12px}
+.s2 p{font-size:15.5px;line-height:1.85;font-style:italic;color:#d6dbe1}
+
+/* sheet 3: lab report */
+.s3{--r:-.6deg;max-width:600px}
+.tok-h{font-family:"Space Mono",monospace;font-size:11.5px;letter-spacing:.26em;color:var(--acid);padding:14px 26px 12px 40px;border-bottom:1px solid var(--line)}
+.tok-row{padding:13px 26px 13px 40px;font-size:13.5px;line-height:1.65;color:#b9c1c9;border-bottom:1px solid #141920}
+.tok-row b{color:var(--txt)}
+.barcode{height:34px;margin:12px 26px 16px 40px;background:repeating-linear-gradient(90deg,#3a434d 0 2px,transparent 2px 5px,#3a434d 5px 6px,transparent 6px 11px);opacity:.6}
+.tok-ca{padding:0 26px 16px 40px;font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.12em;color:#7c8894}
+
+.coin{margin-top:24px;max-width:560px;font-size:14px;line-height:1.7;color:var(--dim)}
+.coin a{color:var(--acid)}
+.socials{margin-top:28px;display:flex;gap:14px}
+.socials a{color:var(--txt);text-decoration:none;font-weight:700;letter-spacing:.1em;border:2px solid #000;background:var(--sheet);box-shadow:4px 4px 0 #000;padding:9px 22px;font-size:13px}
 .socials a:hover{color:var(--acid)}
-.tok{margin-top:26px;border:2px solid rgba(198,255,46,.25);border-radius:14px;padding:16px 18px;max-width:560px;background:rgba(198,255,46,.04)}
-.tok-h{font-size:11px;letter-spacing:3px;color:var(--acid);font-weight:800}
-.tok-row{margin-top:9px;font-size:13.5px;line-height:1.55;color:#c8cdd4}
-.tok-row b{color:#fff}
-.tok-ca{margin-top:11px;font-size:10px;letter-spacing:2.5px;color:#7a828c}
-.legal{font-size:11px;letter-spacing:.24em;color:#4d555d;text-transform:uppercase;margin-top:14px}
+.legal{margin-top:20px;font-size:11px;color:#5b6570}
 
-.right{position:sticky;top:0;height:100svh;border-left:3px solid #000;overflow:hidden;background:#0d1116;min-height:560px}
-.kb{position:absolute;inset:-30px;will-change:transform}
-.kb img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transform:scale(1.14)}
-.kb img.in{animation:reveal 1.5s cubic-bezier(.33,1,.68,1) forwards}
-@keyframes reveal{to{opacity:1;transform:scale(1)}}
-.kb img.live{opacity:1;animation:ken 30s ease-in-out infinite alternate}
-@keyframes ken{from{transform:scale(1)}to{transform:scale(1.09)}}
-.rim{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 60%,rgba(198,255,46,.13),transparent 62%);opacity:0}
-.rim.live{animation:breathe 7s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.45}50%{opacity:1}}
-.flick{position:absolute;inset:0;pointer-events:none;background:rgba(198,255,46,.05);opacity:0}
-.flick.live{animation:flick 11s linear infinite}
-@keyframes flick{0%,93%,100%{opacity:0}94.5%{opacity:1}96%{opacity:0}97.5%{opacity:.6}}
-
-.appwrap{position:fixed;z-index:32;top:92px;right:18px;width:min(28vw,290px);opacity:0;transition:opacity .55s ease;will-change:opacity}
-.appwrap img{display:block;width:100%;height:auto;border:3px solid #000;box-shadow:9px 9px 0 #000;background:#0d1116;cursor:pointer}
-.player{margin-top:0;cursor:pointer;background:var(--paper);color:var(--paper-ink);border:3px solid #000;border-radius:16px;box-shadow:6px 6px 0 #000;padding:13px 14px;position:relative;transform:scale(0);transform-origin:78% 0;transition:transform .55s cubic-bezier(.34,1.7,.4,1)}
-.player.show{transform:scale(1) rotate(-1.4deg)}
-
-.player .row{display:flex;align-items:center;gap:13px}
-.spk{width:56px;height:56px;flex:none;border-radius:50%;background:var(--acid);border:3px solid #000;box-shadow:3px 3px 0 #000;color:#0b0d0f;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
-.spk:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
-.spk.beg{animation:pulse 1.6s ease-out infinite}
-@keyframes pulse{0%{box-shadow:3px 3px 0 #000,0 0 0 0 rgba(198,255,46,.55)}70%{box-shadow:3px 3px 0 #000,0 0 0 16px rgba(198,255,46,0)}100%{box-shadow:3px 3px 0 #000}}
-.player .s{font-size:10px;font-weight:700;letter-spacing:.16em;color:#6b6b60;text-transform:uppercase}
-.player .m{font-size:15px;font-weight:500;line-height:1.3;margin-top:3px}
-.eq{display:flex;gap:2px;align-items:flex-end;height:12px;margin-top:6px}
-.eq span{width:3px;height:4px;background:#0b0d0f;animation:eqb .9s ease-in-out infinite;animation-play-state:paused}
-.eq.on span{animation-play-state:running}
-.eq span:nth-child(2){animation-delay:.12s}.eq span:nth-child(3){animation-delay:.26s}.eq span:nth-child(4){animation-delay:.4s}.eq span:nth-child(5){animation-delay:.54s}
-@keyframes eqb{0%,100%{height:4px}50%{height:12px}}
-.player .go{display:block;margin-top:11px;padding-top:9px;border-top:2px solid #000;text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;color:#0b0d0f;text-transform:uppercase;text-decoration:none}
+.appwrap{position:absolute;right:18px;bottom:18px;z-index:12;width:min(27vw,290px)}
+.player{background:#0d1116;border:3px solid #000;box-shadow:8px 8px 0 #000;padding:13px 14px;transform:rotate(-1deg)}
+.row{display:flex;align-items:center;gap:12px;cursor:pointer}
+.spkbtn{width:52px;height:52px;flex:none;border-radius:50%;background:var(--acid);border:3px solid #000;box-shadow:3px 3px 0 #000;color:#0b0d0f;display:flex;align-items:center;justify-content:center}
+.s{font-size:10px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
+.m{font-size:13px;margin-top:3px}
+.eq{display:flex;gap:2.5px;margin-top:6px;height:12px;align-items:flex-end}
+.eq span{width:3.5px;background:var(--acid);height:3px}
+.playing .eq span{animation:eq .7s ease-in-out infinite alternate}
+.eq span:nth-child(2){animation-delay:.12s}.eq span:nth-child(3){animation-delay:.24s}.eq span:nth-child(4){animation-delay:.06s}.eq span:nth-child(5){animation-delay:.18s}
+@keyframes eq{from{height:3px}to{height:12px}}
+.go{display:block;margin-top:10px;font-size:11.5px;color:var(--acid);text-decoration:none}
 
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
-  .right{position:relative;height:auto;min-height:112vw;border-left:0;border-top:3px solid #000;order:-1}
-  .left{min-height:0}
-  #verifyca{display:none}
-  .kb img{object-position:22% top}
-  .left{padding:34px 7vw 44px}
-  h1{font-size:clamp(32px,9vw,52px);min-height:0}
-  .lede{font-size:15.5px}
-  .prayer p{font-size:15px}
-  .cawrap .lab{display:none}
-  .pill{font-size:10.5px}
-  .appwrap{width:auto;top:auto;bottom:10px;left:10px;right:10px}
-  .player{margin-top:14px;padding:11px 12px}
-  .spk{width:48px;height:48px}
-  .player .m{font-size:13.5px}
+  .right{position:relative;height:auto;min-height:112vw;border-left:0;border-top:2px solid #000;order:-1}
+  .right img{object-position:22% top}
+  .left{min-height:0;padding:30px 6vw 60px}
+  .s1 h1{font-size:clamp(42px,12vw,66px)}
+  .stamp{font-size:12px;top:10px;right:10px}
+  .cawrap .copy{display:none}
+  .appwrap{left:10px;right:10px;bottom:10px;width:auto}
+  .player{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .right img{animation:none}
+  .sheet{animation:none;opacity:1;transform:none}
+  .stamp{animation:none;opacity:.92;transform:rotate(-5deg)}
+  .grain{animation:none}
 }
 </style>
 </head>
 <body>
-<div class="grain" id="grain"></div>
-<div class="vig"></div>
+<div class="grain"></div>
 
-<div class="stage">
-  <div class="bar">
-    <div class="corner">
-      <img src="/logo.png?v=3" alt="APESONUS">
-      <div><div class="b">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
-    </div>
-    <div class="cawrap">
-      <span class="lab">Rx</span>
-      <span class="pill" id="ca">PASTE-PUMP-MINT-HERE</span>
-      <a class="copy" id="verifyca" href="https://pump.fun" target="_blank" rel="noopener">Verify $PUMP</a>
-      <button class="copy" id="copyca" type="button">Copy</button>
-    </div>
+<div class="bar">
+  <div class="corner">
+    <img src="/logo.png?v=3" alt="APESONUS">
+    <div><div class="b anton" style="letter-spacing:.16em">APESONUS</div><div class="t">The entertainment clinic for crypto degeneracy</div></div>
   </div>
+  <div class="cawrap">
+    <span class="lab">Rx</span>
+    <span class="pill">$PUMP ACCEPTED HERE</span>
+    <a class="copy" href="https://pump.fun" target="_blank" rel="noopener">Verify $PUMP</a>
+  </div>
+</div>
 
-  <div class="grid">
-    <div class="left">
-      <div class="dots" id="dots"></div>
-      <div class="col" id="col" data-depth="-7">
-        <div class="eyebrow" id="eyebrow">Diagnosis</div>
-        <h1><span id="typed"></span><span class="dot" id="dot">.</span><span class="cur" id="cur"></span></h1>
-        <p class="lede up" id="r1">There is no cure. There is a soundtrack. <b>Real therapy is $200 an hour</b> and your therapist has never held a bag to zero. Ours is <b>one dollar a day, paid in $PUMP</b>, and the whole staff lives on the chart with you.</p>
-        <a class="enter up" id="r2" href="https://music.apesonus.com">Enter clinic</a>
-        <div class="prayer up" id="r3">
-          <div class="k">THE DEGEN'S PRAYER</div>
-          <p>Dr. Onus, I bought the top again.<br>
-          Grant me one banger before this candle closes.<br>
-          Forgive my leverage, as I forgive the dev who rugged me.<br>
-          Amen.</p>
-        </div>
-        <p class="coin up" id="r4">The clinic charges in $PUMP because that is what the patients already have on them. Every dollar it takes sits in <a href="https://music.apesonus.com/till">a wallet you can watch</a>.</p>
-        <div class="tok up" id="r7">
-          <div class="tok-h">THE NATIVE CURRENCY OF BAD DECISIONS</div>
-          <div class="tok-row">Launching another coin at people already traumatised by coin launches felt medically irresponsible, so we took the one they were holding anyway.</div>
-          <div class="tok-row"><b>$PUMP is where the trenches start.</b> The clinic is where they end up. A dollar in $PUMP opens the door, The Call pays out in $PUMP, and there is nothing else here to buy.</div>
-          <div class="tok-row"><b>Pump launches the coin. We treat the holder.</b></div>
-          <div class="tok-ca">$PUMP &middot; VERIFY THE OFFICIAL TOKEN BEFORE YOU SEND ANYTHING</div>
-        </div>
+<div class="grid">
+  <div class="left">
 
-        <div class="socials up" id="r5">
-          <a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a>
-          <a href="https://t.me/ApeSonus" target="_blank" rel="noopener">Telegram</a>
-        </div>
-        <div class="legal up" id="r6">Not affiliated with Pump.fun · Unlicensed · Unbothered · Not financial advice</div>
+    <div class="sheet s1 anton" style="animation-delay:.1s">
+      <div class="stamp">Diagnosis</div>
+      <div class="formline"><span>APESONUS</span><b>·</b><span>The entertainment clinic for crypto degeneracy</span></div>
+      <div class="pad">
+        <h1><span class="typed" id="typed"></span><span class="dot">.</span></h1>
+        <p class="lede" style="font-family:Archivo">There is no cure. There is a soundtrack. <b>Real therapy is $200 an hour</b> and your therapist has never held a bag to zero. Ours is <b>one dollar a day, paid in $PUMP</b>, and the whole staff lives on the chart with you.</p>
+        <a class="enter" href="https://music.apesonus.com">Enter clinic</a>
       </div>
     </div>
 
-    <div class="right">
-      <div class="kb" id="kb" data-depth="20"><img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" id="doc"></div>
-      <div class="rim" id="rim"></div>
-      <div class="flick" id="flick"></div>
+    <div class="sheet s2" style="animation-delay:.45s">
+      <div class="tape tl"></div><div class="tape tr"></div>
+      <div class="pad">
+        <div class="k">THE DEGEN'S PRAYER</div>
+        <p>Dr. Onus, I bought the top again.<br>Grant me one banger before this candle closes.<br>Forgive my leverage, as I forgive the dev who rugged me.<br>Amen.</p>
+      </div>
+    </div>
+
+    <div class="sheet s3" style="animation-delay:.7s">
+      <div class="tok-h">THE NATIVE CURRENCY OF BAD DECISIONS</div>
+      <div class="tok-row">Launching another coin at people already traumatised by coin launches felt medically irresponsible, so we took the one they were holding anyway.</div>
+      <div class="tok-row"><b>$PUMP is where the trenches start.</b> The clinic is where they end up. A dollar in $PUMP opens the door, The Call pays out in $PUMP, and there is nothing else here to buy.</div>
+      <div class="tok-row"><b>Pump launches the coin. We treat the holder.</b></div>
+      <div class="barcode"></div>
+      <div class="tok-ca">$PUMP · VERIFY THE OFFICIAL TOKEN BEFORE YOU SEND ANYTHING</div>
+    </div>
+
+    <p class="coin">The clinic charges in $PUMP because that is what the patients already have on them. Every dollar it takes sits in <a href="https://music.apesonus.com/till">a wallet you can watch</a>.</p>
+
+    <div class="socials"><a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a></div>
+    <div class="legal">Not affiliated with Pump.fun · Unlicensed · Unbothered · Not financial advice</div>
+  </div>
+
+  <div class="right">
+    <img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist">
+    <div class="rim"></div>
+    <div class="clip">RESIDENT · UNLICENSED</div>
+    <div class="appwrap">
+      <div class="player" id="player">
+        <div class="row">
+          <div class="spkbtn"><svg id="ico" viewBox="0 0 24 24" width="24" height="24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></div>
+          <div>
+            <div class="s" id="bstate">Now playing in the clinic</div>
+            <div class="m"><b>APE FIRST</b> · Satosheek</div>
+            <div class="eq"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="appwrap" id="app">
-  <div class="player" id="player">
-    <div class="row">
-      <button class="spk" id="spk" type="button" aria-label="Play the clip">
-        <svg id="ico" viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-      </button>
-      <div>
-        <div class="s" id="bstate">Now playing in the clinic</div>
-        <div class="m"><b id="tname"></b> &middot; <span id="tartist"></span></div>
-        <div class="eq" id="eq"><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-    </div>
-    <a class="go" href="https://music.apesonus.com">Tap for the full dose &rarr;</a>
-  </div>
-</div>
-<audio id="track" preload="none"></audio>
-
+<audio id="track" preload="auto" src="/ape-first.mp3"></audio>
 <script>
 (function(){
-  var seen=false;
-  try{seen=sessionStorage.getItem('ape_intro')==='1'}catch(e){}
-  var calm = seen || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  try{sessionStorage.setItem('ape_intro','1')}catch(e){}
+  var LINE='YOU HAVE CRYPTO DEGENERACY', el=document.getElementById('typed'), i=0;
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm){el.textContent=LINE;el.classList.add('done');}
+  else (function t(){ if(i<=LINE.length){el.textContent=LINE.slice(0,i);i++;setTimeout(t,38);} else el.classList.add('done'); })();
 
-  var ca=document.getElementById('ca'),btn=document.getElementById('copyca');
-  if(ca.textContent.indexOf('PASTE')===0){ca.textContent='$PUMP ACCEPTED HERE';btn.style.display='none'}
-  else{btn.addEventListener('click',function(){navigator.clipboard.writeText(ca.textContent.trim()).then(function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy'},1500)})})}
-
-  var TRACKS=[{src:"/ape-first.mp3",title:"APE FIRST",artist:"Satosheek"}];
-  var pick=TRACKS[Math.floor(Math.random()*TRACKS.length)];
-  var app=document.getElementById('app'),player=document.getElementById('player');
-  var a=document.getElementById('track'),eq=document.getElementById('eq'),spk=document.getElementById('spk');
-  var ico=document.getElementById('ico'),state=document.getElementById('bstate');
-  var PLAY='<path d="M8 5v14l11-7z" fill="currentColor"/>';
-  var PAUSE='<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>';
-  var dead=false,armed=false,want=false;
-  setTimeout(function(){arm()},600);
-
-  document.getElementById('tname').textContent=pick.title;
-  document.getElementById('tartist').textContent=pick.artist;
-
-  function paint(playing){
-    ico.innerHTML=playing?PAUSE:PLAY;
-    eq.classList.toggle('on',playing);
-    spk.classList.remove('beg');
-    state.textContent=playing?'Now playing in the clinic':'Press play';
+  var a=document.getElementById('track'),player=document.getElementById('player'),
+      ico=document.getElementById('ico'),bs=document.getElementById('bstate');
+  function paint(){
+    var p=!a.paused;
+    player.classList.toggle('playing',p);
+    ico.innerHTML=p?'<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>':'<path d="M8 5v14l11-7z" fill="currentColor"/>';
+    bs.textContent=p?'Now playing in the clinic':'Press play for the dose';
   }
-  paint(false);
-
-  function arm(){if(armed||dead)return;armed=true;a.preload='auto';a.src=pick.src;a.load()}
-  function start(){
-    if(dead)return;
-    want=true;arm();
-    if(a.readyState<3)state.textContent='Loading';
-    var p=a.play();
-    if(p&&p.catch)p.catch(function(){want=false;spk.classList.add('beg');state.textContent='Press play'});
-  }
-  function toggle(){if(dead)return;if(a.paused){start()}else{want=false;a.pause()}}
-  player.addEventListener('click',function(e){if(e.target.closest('a'))return;toggle()});
-  a.addEventListener('error',function(){dead=true;player.querySelector('.row').style.display='none';state.textContent=''});
-  a.addEventListener('canplay',function(){if(want&&a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}});
-  a.addEventListener('ended',function(){paint(false)});
-  a.addEventListener('pause',function(){paint(false)});
-  a.addEventListener('play',function(){paint(true)});
-
-  var eyebrow=document.getElementById('eyebrow'),typed=document.getElementById('typed');
-  var cur=document.getElementById('cur'),dot=document.getElementById('dot'),doc=document.getElementById('doc');
-  var kb=document.getElementById('kb'),rim=document.getElementById('rim'),flick=document.getElementById('flick');
-  var dots=document.getElementById('dots'),grain=document.getElementById('grain'),col=document.getElementById('col');
-  var enter=document.getElementById('r2');
-  var LINE='YOU HAVE CRYPTO DEGENERACY';
-  var rows=['r1','r2','r3','r4','r7','r5','r6'];
-
-  function reveal(){
-    rows.forEach(function(id,i){
-      setTimeout(function(){document.getElementById(id).classList.add('in')},i*110);
-    });
-    setTimeout(function(){enter.classList.add('sweep')},rows.indexOf('r2')*110+320);
-  }
-
-  function ambient(){
-    doc.classList.add('live');dots.classList.add('live');
-    rim.classList.add('live');flick.classList.add('live');
-  }
-
-  function parallax(){
-    var tx=0,ty=0,cx=0,cy=0,on=false;
-    window.addEventListener('mousemove',function(e){
-      tx=(e.clientX/window.innerWidth-.5)*2;
-      ty=(e.clientY/window.innerHeight-.5)*2;
-      if(!on){on=true;loop()}
-    });
-    function loop(){
-      cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
-      [kb,col].forEach(function(el){
-        var d=parseFloat(el.getAttribute('data-depth'));
-        el.style.transform='translate3d('+(cx*d).toFixed(2)+'px,'+(cy*d*.6).toFixed(2)+'px,0)';
-      });
-      requestAnimationFrame(loop);
-    }
-  }
-
-  function run(){
-    if(calm){
-      typed.textContent=LINE;cur.classList.add('off');dot.classList.add('hit');
-      eyebrow.style.opacity='1';doc.style.opacity='1';doc.style.transform='none';
-      grain.style.animation='none';
-      rows.forEach(function(id){document.getElementById(id).classList.add('in')});
-      app.style.opacity='1';
-      player.style.transition='none';
-      player.classList.add('show');
-      arm();
-      return;
-    }
-
-    eyebrow.classList.add('in');
-
-    var i=0;
-    function type(){
-      if(i<=LINE.length){
-        typed.textContent=LINE.slice(0,i);
-        i++;
-        setTimeout(type,i===1?0:38);
-      } else {
-        cur.classList.add('off');
-        dot.classList.add('hit');
-        setTimeout(reveal,180);
-        setTimeout(function(){doc.classList.add('in')},60);
-      }
-    }
-    setTimeout(type,320);
-
-    setTimeout(function(){app.style.opacity='1';arm()},2600);
-    setTimeout(ambient,4250);
-    setTimeout(function(){player.classList.add('show')},4300);
-    setTimeout(start,4650);
-    parallax();
-  }
-
-  if(document.readyState==='complete')run();
-  else window.addEventListener('load',run);
+  player.addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
+    if(a.paused){a.play().catch(function(){});}else{a.pause();}
+    paint();
+  });
+  a.addEventListener('play',paint);a.addEventListener('pause',paint);a.addEventListener('ended',paint);
+  paint();
 })();
 </script>
 </body>
