@@ -236,7 +236,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       <div class="tok-h">THE NATIVE CURRENCY OF BAD DECISIONS</div>
       <div class="tok-row">Launching another coin for people already traumatised by coin launches felt medically irresponsible, so we used the one they were holding anyway.</div>
       <div class="tok-row"><b>$PUMP is where the trenches start.</b> The clinic is where they end up.</div>
-      <div class="tok-row">A dollar&rsquo;s worth of $PUMP opens the door. The Call pays out in $PUMP. That is the entire prescription.</div>
+      <div class="tok-row">A dollar&rsquo;s worth of $PUMP opens the door. After that it&rsquo;s you, the ward, and eight songs fighting for their ten thousand doses.</div>
       <div class="tok-row"><b>Pump launches the coin. We treat the holder.</b></div>
       <div class="barcode"></div>
       <div class="tok-ca" id="ca">
@@ -283,7 +283,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   var a=document.getElementById('track'),player=document.getElementById('player'),
       ico=document.getElementById('ico'),bs=document.getElementById('bstate'),
       spk=document.querySelector('.spkbtn');
-  var CAP=15;
   function paint(){
     var p=!a.paused;
     player.classList.toggle('playing',p);
@@ -291,7 +290,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
     ico.innerHTML=p?'<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>':'<path d="M8 5v14l11-7z" fill="currentColor"/>';
     bs.textContent=p?'Now playing in the clinic':'Press play for the dose';
   }
-  a.addEventListener('timeupdate',function(){ if(a.currentTime>=CAP){a.pause();a.currentTime=0;} });
   a.addEventListener('error',function(){ if(spk)spk.classList.remove('beg'); });
   function tryPlay(){
     try{
