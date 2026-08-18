@@ -182,12 +182,16 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
-  /* Dr. Onus used to sit above the words on a phone, so somebody had to
-     scroll a whole screen of artwork before finding out what this place is.
-     He comes after the pitch now, and shorter. */
-  .right{position:relative;height:auto;min-height:64vw;max-height:78vw;border-left:0;border-top:2px solid #000;order:1}
-  .right img{object-position:22% top}
-  .left{min-height:0;padding:30px 6vw 60px}
+  /* DR. ONUS ON A PHONE. He used to eat a whole screen above the words, then
+     a whole screen below them. Neither is a hero: it is a portrait in a
+     letterbox now, after the pitch, cropped to his face and capped so it can
+     never take more than a third of the screen. */
+  .right{position:relative;height:38vh;min-height:220px;max-height:320px;
+    border-left:0;border-top:2px solid #000;order:1}
+  .right img{object-position:50% 18%;transform:none;animation:none}
+  /* The header is fixed, so the hero has to start below it or the first line
+     of the headline sits underneath the logo. */
+  .left{min-height:0;padding:104px 6vw 50px}
   .s1 h1{font-size:clamp(42px,12vw,66px)}
   .stamp{font-size:12px;top:10px;right:10px}
   .cawrap .copy{display:none}
@@ -268,7 +272,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
           <a class="enter" href="https://music.apesonus.com">Enter the ward</a>
           <a class="enter ghost" href="https://music.apesonus.com/session">Get admitted</a>
         </div>
-        <div class="beta-note">BETA &middot; FREE TO LISTEN &middot; ADMISSION FROM $1.99 <span id="medsPay"></span></div>
+        <div class="beta-note">BETA &middot; FREE TO LISTEN &middot; PAY ONLY FOR A PRIVATE SESSION <span id="medsPay"></span></div>
       </div>
     </div>
 
