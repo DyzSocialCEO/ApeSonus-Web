@@ -165,6 +165,21 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .ca button{font:700 11px Archivo,sans-serif;letter-spacing:.06em;padding:7px 11px;
   border:2px solid currentColor;background:transparent;cursor:pointer}
 
+/* THE CONTRACT, first thing on the page and unmissable. Dexscreener and every
+   degen who lands here looks for exactly this and nothing else. */
+.cabar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:var(--acid);color:#0b0d0a;padding:10px 16px;border-bottom:3px solid #000}
+.cabar .t{font:900 13px/1 Archivo,sans-serif;letter-spacing:.1em;white-space:nowrap}
+.cabar code{font:700 14px/1.2 'Courier Prime',monospace;word-break:break-all;flex:1;min-width:180px}
+.cabar button,.cabar a{font:900 12px/1 Archivo,sans-serif;letter-spacing:.08em;padding:8px 13px;
+  border:2px solid #0b0d0a;background:transparent;color:#0b0d0a;cursor:pointer;text-decoration:none}
+.cabar a{background:#0b0d0a;color:var(--acid)}
+.cabar button:hover{background:#0b0d0a;color:var(--acid)}
+@media(max-width:880px){
+  .cabar{padding:9px 12px;gap:8px}
+  .cabar code{font-size:12px;flex-basis:100%;order:3}
+}
+
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
   /* Dr. Onus used to sit above the words on a phone, so somebody had to
@@ -221,6 +236,13 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 <div class="dots" aria-hidden="true"></div>
 <div class="glow" aria-hidden="true"></div>
 <div class="grain"></div>
+
+<div class="cabar" id="caBar" style="display:none">
+  <span class="t">$<span id="caSym">MEDS</span> CA</span>
+  <code id="caTop"></code>
+  <button type="button" id="caCopyTop">COPY</button>
+  <a id="caBuyTop" href="#" target="_blank" rel="noopener">BUY</a>
+</div>
 
 <div class="bar">
   <div class="corner">
@@ -341,6 +363,19 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       setTimeout(function(){ b.textContent = 'Copy contract' }, 1600)
     })
     sheet.style.display = ''
+
+    /* The bar at the very top. Same contract, said first and said loudest. */
+    var url = m.buyUrl || ('https://pump.fun/coin/' + m.ca)
+    document.getElementById('caSym').textContent = sym
+    document.getElementById('caTop').textContent = m.ca
+    document.getElementById('caBuyTop').href = url
+    document.getElementById('caCopyTop').addEventListener('click', function(){
+      navigator.clipboard.writeText(m.ca)
+      this.textContent = 'COPIED'
+      var b = this
+      setTimeout(function(){ b.textContent = 'COPY' }, 1600)
+    })
+    document.getElementById('caBar').style.display = 'flex'
   }).catch(function(){})
 })()
 </script>
