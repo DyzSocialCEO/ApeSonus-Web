@@ -147,9 +147,30 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 @keyframes eq{from{height:3px}to{height:12px}}
 .go{display:block;margin-top:10px;font-size:11.5px;color:var(--acid);text-decoration:none}
 
+/* Two ways in: the free one first, because free is the offer. */
+.cta2{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.enter.ghost{background:transparent;color:var(--acid);border:2px solid var(--acid)}
+.enter.ghost:hover{background:var(--acid);color:#0b0d0a}
+
+/* On the record, and the token sheet under it. */
+.readmore{display:inline-block;margin-top:12px;font:700 12px/1 Archivo,sans-serif;
+  letter-spacing:.06em;color:var(--acid);text-decoration:none}
+.readmore:hover{text-decoration:underline}
+.caserow{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px dashed rgba(0,0,0,.18)}
+.caserow:last-of-type{border-bottom:0}
+.caserow b{font:700 14px/1.25 Archivo,sans-serif}
+.caserow span{font:400 11.5px/1.4 'Courier Prime',monospace;opacity:.72}
+.ca{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.ca code{font:400 11px/1.4 'Courier Prime',monospace;word-break:break-all;opacity:.85}
+.ca button{font:700 11px Archivo,sans-serif;letter-spacing:.06em;padding:7px 11px;
+  border:2px solid currentColor;background:transparent;cursor:pointer}
+
 @media(max-width:880px){
   .grid{grid-template-columns:1fr}
-  .right{position:relative;height:auto;min-height:112vw;border-left:0;border-top:2px solid #000;order:-1}
+  /* Dr. Onus used to sit above the words on a phone, so somebody had to
+     scroll a whole screen of artwork before finding out what this place is.
+     He comes after the pitch now, and shorter. */
+  .right{position:relative;height:auto;min-height:64vw;max-height:78vw;border-left:0;border-top:2px solid #000;order:1}
   .right img{object-position:22% top}
   .left{min-height:0;padding:30px 6vw 60px}
   .s1 h1{font-size:clamp(42px,12vw,66px)}
@@ -220,13 +241,43 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       <div class="stamp">Diagnosis</div>
       <div class="pad">
         <h1><span class="ghost">YOU HAVE CRYPTO DEGENERACY<span class="dot">.</span></span><span class="live"><span class="typed" id="typed"></span><span class="dot" id="livedot">.</span></span></h1>
-        <p class="lede" style="font-family:Archivo">There is no cure. There is a soundtrack. <b>Real therapy is $200 an hour</b> and your therapist has never held a bag to zero. Ours writes prescriptions, and <b>listening to them is free.</b> Get admitted and one of them writes you your own.</p>
-        <a class="enter" href="https://music.apesonus.com">Enter clinic</a>
-        <div class="beta-note">BETA IS LIVE &middot; FREE TO LISTEN &middot; ADMISSION FROM $1.99</div>
+        <p class="lede" style="font-family:Archivo">The Ward is open and everything in it is <b>free to hear.</b> When you have a story worth treating, get admitted, pick a therapist and tell them what happened. You leave with <b>a Prescription written from your own case.</b> Keep it private, or put it on the Record.</p>
+        <div class="cta2">
+          <a class="enter" href="https://music.apesonus.com">Enter the ward</a>
+          <a class="enter ghost" href="https://music.apesonus.com/session">Get admitted</a>
+        </div>
+        <div class="beta-note">BETA &middot; FREE TO LISTEN &middot; ADMISSION FROM $1.99 <span id="medsPay"></span></div>
       </div>
     </div>
 
-    <div class="sheet s2" style="animation-delay:.45s">
+    <div class="sheet s3" style="animation-delay:.7s">
+      <div class="tok-h">HOW THE CLINIC WORKS</div>
+      <div class="tok-row"><b>01 &middot; ENTER THE WARD.</b> Every Prescription in the clinic is free to hear. No account needed to look, none of it behind a wall.</div>
+      <div class="tok-row"><b>02 &middot; GET ADMITTED.</b> Choose a therapist and open a private session. That is the only thing the clinic charges for.</div>
+      <div class="tok-row"><b>03 &middot; TELL THEM WHAT HAPPENED.</b> They write a Prescription from your case. Keep it private if you want to.</div>
+      <div class="tok-row"><b>04 &middot; PUT IT ON THE RECORD.</b> Publish it for the clinic to hear. Genuine listening builds Qualified Doses, and an active inpatient can earn from them.</div>
+      <div class="barcode"></div>
+    </div>
+
+    <div class="sheet s4" id="casesSheet" style="animation-delay:.85s">
+      <div class="tok-h">ON THE RECORD</div>
+      <div id="caseList">
+        <div class="tok-row">Nothing on the record yet. The first patient to publish is going to be very easy to find.</div>
+      </div>
+      <a class="readmore" href="https://music.apesonus.com/records">Read the records &rarr;</a>
+    </div>
+
+    <div class="sheet s5" id="medsSheet" style="display:none;animation-delay:.9s">
+      <div class="tok-h" id="medsTitle">TAKE YOUR $MEDS.</div>
+      <div class="tok-row" id="medsBlurb">The fan token of the clinic. Admission is always priced in dollars. Pay in USDC, or take the clinic rate with the token. Active case studies can earn it back when genuine listeners take their published Prescriptions.</div>
+      <div class="ca" id="medsCaRow">
+        <code id="medsCa"></code>
+        <button type="button" id="medsCopy">Copy contract</button>
+      </div>
+      <a class="readmore" id="medsBuy" href="#" target="_blank" rel="noopener">Get it &rarr;</a>
+    </div>
+
+    <div class="sheet s2" style="animation-delay:.95s">
       <div class="tape tl"></div><div class="tape tr"></div>
       <div class="pad">
         <div class="k">THE DEGEN'S PRAYER</div>
@@ -234,19 +285,10 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       </div>
     </div>
 
-    <div class="sheet s3" style="animation-delay:.7s">
-      <div class="tok-h">HOW THE CLINIC WORKS</div>
-      <div class="tok-row">Every song is a Prescription, and <b>listening to all of them costs nothing, forever.</b></div>
-      <div class="tok-row">Get admitted and you are an inpatient: <b>a private session with the therapist you pick.</b> Tell them what happened to you.</div>
-      <div class="tok-row">A couple of hours later you have <b>a Prescription written from your own case.</b> Keep it private, or put it on the record under your name.</div>
-      <div class="tok-row"><b>The Original Prescription</b> is the founding paper of the ward, issued to admitted patients only, and never issued again once intake closes.</div>
-      <div class="barcode"></div>
-    </div>
-
     <p class="coin">Every Dose counts, and official Prescriptions and patient cases rank on the same floor: <a href="https://music.apesonus.com/chart">view the chart</a> or <a href="https://music.apesonus.com/records">read the records</a>.</p>
 
     <div class="socials"><a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a></div>
-    <div class="legal">There is no APESONUS token. Any coin using this name is fake and not ours.</div>
+    <div class="legal" id="legalToken">Any contract address not published on this page is not ours.</div>
     <div class="legal">Unlicensed · Unbothered · Not financial advice</div>
   </div>
 
@@ -272,6 +314,36 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 </div>
 
 <audio id="track" preload="auto" src="/ape-first.mp3"></audio>
+
+<script>
+/* THE TOKEN SWITCH.
+   Everything about it lives in /meds.json so nothing here has to be edited by
+   hand on launch day. While live is false the section is not in the page at
+   all, and the site says nothing about a token. */
+(function(){
+  fetch('/meds.json?v=' + Date.now()).then(function(r){ return r.json() }).then(function(m){
+    if (!m || m.live !== true || !m.ca) return
+    var sym = m.symbol || 'MEDS'
+    var sheet = document.getElementById('medsSheet')
+    document.getElementById('medsTitle').textContent = 'TAKE YOUR $' + sym + '.'
+    document.getElementById('medsCa').textContent = m.ca
+    var buy = document.getElementById('medsBuy')
+    buy.href = m.buyUrl || ('https://pump.fun/coin/' + m.ca)
+    buy.textContent = 'Get $' + sym + ' \u2192'
+    var pay = document.getElementById('medsPay')
+    if (pay) pay.textContent = '\u00b7 USDC OR $' + sym
+    var legal = document.getElementById('legalToken')
+    if (legal) legal.textContent = 'The only official $' + sym + ' contract is the one on this page.'
+    document.getElementById('medsCopy').addEventListener('click', function(){
+      navigator.clipboard.writeText(m.ca)
+      this.textContent = 'Copied'
+      var b = this
+      setTimeout(function(){ b.textContent = 'Copy contract' }, 1600)
+    })
+    sheet.style.display = ''
+  }).catch(function(){})
+})()
+</script>
 <script>
 (function(){
   var LINE='YOU HAVE CRYPTO DEGENERACY', el=document.getElementById('typed'), i=0;
