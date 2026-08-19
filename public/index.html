@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APESONUS • The Entertainment Clinic for Crypto Degeneracy</title>
-<meta name="description" content="The entertainment clinic for crypto degeneracy. Listening is free. Get admitted, tell a therapist what happened, and leave with a Prescription of your own.">
+<meta name="description" content="The entertainment clinic for crypto degeneracy. Eight therapists. Five conditions. Prescriptions free to take.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://apesonus.com">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -18,11 +18,11 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="You have crypto degeneracy. The entertainment clinic.">
-<meta property="og:title" content="APESONUS • GET ADMITTED">
-<meta property="og:description" content="Listening is free. Get admitted, tell a therapist what happened, and leave with a Prescription of your own.">
+<meta property="og:title" content="APESONUS • THE CLINIC IS OPEN">
+<meta property="og:description" content="Eight therapists. Five conditions. Every Prescription in the Ward is free to hear.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="APESONUS • GET ADMITTED">
-<meta name="twitter:description" content="Listening is free. Get admitted, tell a therapist what happened, and leave with a Prescription of your own.">
+<meta name="twitter:title" content="APESONUS • THE CLINIC IS OPEN">
+<meta name="twitter:description" content="Eight therapists. Five conditions. Every Prescription in the Ward is free to hear.">
 <meta name="twitter:image" content="https://apesonus.com/og-image-v7.png">
 <meta name="theme-color" content="#07090b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","name":"APESONUS","url":"https://apesonus.com","logo":"https://apesonus.com/logo.png","sameAs":["https://x.com/apesonus","https://music.apesonus.com"]},
-{"@type":"WebApplication","name":"APESONUS","url":"https://music.apesonus.com","applicationCategory":"MusicApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Listening is free. Admission from $1.99 buys private sessions with a therapist and the right to publish your own Prescription."}}
+{"@type":"WebApplication","name":"APESONUS","url":"https://music.apesonus.com","applicationCategory":"MusicApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Every Prescription in the Ward is free to hear."}}
 ]}
 </script>
 <style>
@@ -65,6 +65,17 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 .right img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;transform:scale(1.05);animation:kb 36s ease-in-out infinite alternate}
 /* polaroid clip frame on the doctor */
 .clip{position:absolute;top:22px;left:22px;z-index:6;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.24em;color:#0a0c0e;background:var(--acid);border:2px solid #000;box-shadow:4px 4px 0 #000;padding:7px 12px;transform:rotate(-2deg)}
+.clip b{display:block;font:700 13px/1 Archivo,sans-serif;letter-spacing:.16em}
+.clip span{display:block;margin-top:4px;font-size:9px;letter-spacing:.2em}
+/* He runs the place now, so he gets to say something. Bottom left of the
+   portrait: the name plate holds the top left and the player holds the top
+   right, so this is the only corner where it cannot land on either of them.
+   A phone gets the portrait as a short letterbox that already carries the
+   plate and the player, so the line stays off it there. */
+.saying{position:absolute;left:22px;bottom:26px;z-index:6;max-width:min(340px,62%);
+  font:400 12.5px/1.6 "Space Mono",monospace;color:#e9edf0;background:rgba(7,9,11,.74);
+  border-left:3px solid var(--acid);padding:11px 13px}
+@media(max-width:880px){ .saying{display:none} }
 .rim{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 140px rgba(198,255,46,.08);animation:breathe 7s ease-in-out infinite}
 @keyframes breathe{0%,100%{box-shadow:inset 0 0 110px rgba(198,255,46,.07)}50%{box-shadow:inset 0 0 190px rgba(198,255,46,.15)}}
 .flick{position:absolute;inset:0;pointer-events:none;background:rgba(198,255,46,.05);opacity:0;animation:flick 9s linear infinite}
@@ -241,13 +252,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 <div class="glow" aria-hidden="true"></div>
 <div class="grain"></div>
 
-<div class="cabar" id="caBar" style="display:none">
-  <span class="t">$<span id="caSym">MEDS</span> CA</span>
-  <code id="caTop"></code>
-  <button type="button" id="caCopyTop">COPY</button>
-  <a id="caBuyTop" href="#" target="_blank" rel="noopener">BUY</a>
-</div>
-
 <div class="bar">
   <div class="corner">
     <img src="/logo.png?v=3" alt="APESONUS">
@@ -256,7 +260,7 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
   <div class="cawrap">
     <span class="lab">Rx</span>
     <span class="pill">LISTENING IS FREE</span>
-    <a class="copy" href="https://music.apesonus.com">GET ADMITTED</a>
+    <a class="copy" href="https://music.apesonus.com">ENTER THE CLINIC</a>
   </div>
 </div>
 
@@ -267,40 +271,22 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       <div class="stamp">Diagnosis</div>
       <div class="pad">
         <h1><span class="ghost">YOU HAVE CRYPTO DEGENERACY<span class="dot">.</span></span><span class="live"><span class="typed" id="typed"></span><span class="dot" id="livedot">.</span></span></h1>
-        <p class="lede" style="font-family:Archivo">The Ward is open and everything in it is <b>free to hear.</b> When you have a story worth treating, get admitted, pick a therapist and tell them what happened. You leave with <b>a Prescription written from your own case.</b> Keep it private, or put it on the Record.</p>
+        <p class="lede" style="font-family:Archivo">Eight therapists are working the trenches right now, and every Prescription in the Ward is <b>free to hear.</b> Finish one and it counts as a Dose. Pick whichever therapist sounds like your particular problem.</p>
         <div class="cta2">
-          <a class="enter" href="https://music.apesonus.com">Enter the ward</a>
-          <a class="enter ghost" href="https://music.apesonus.com/session">Get admitted</a>
+          <a class="enter" href="https://music.apesonus.com">Enter the clinic</a>
         </div>
-        <div class="beta-note">BETA &middot; FREE TO LISTEN &middot; PAY ONLY FOR A PRIVATE SESSION <span id="medsPay"></span></div>
+        <div class="beta-note">BETA &middot; TREATMENT IS CURRENTLY FREE</div>
       </div>
     </div>
 
     <div class="sheet s3" style="animation-delay:.7s">
-      <div class="tok-h">HOW THE CLINIC WORKS</div>
-      <div class="tok-row"><b>01 &middot; ENTER THE WARD.</b> Every Prescription in the clinic is free to hear. No account needed to look, none of it behind a wall.</div>
-      <div class="tok-row"><b>02 &middot; GET ADMITTED.</b> Choose a therapist and open a private session. That is the only thing the clinic charges for.</div>
-      <div class="tok-row"><b>03 &middot; TELL THEM WHAT HAPPENED.</b> They write a Prescription from your case. Keep it private if you want to.</div>
-      <div class="tok-row"><b>04 &middot; PUT IT ON THE RECORD.</b> Publish it for the clinic to hear. Genuine listening builds Qualified Doses, and an active inpatient can earn from them.</div>
+      <div class="tok-h">THE CLINIC</div>
+      <div class="tok-row"><b>8 THERAPISTS.</b> Each with their own sound and their own particular area of questionable expertise.</div>
+      <div class="tok-row"><b>5 CONDITIONS.</b> DEGEN &middot; COPE &middot; ZEN &middot; REKT &middot; MOON</div>
+      <div class="tok-row"><b>PRESCRIPTIONS.</b> New treatment goes up on the Ward regularly, and nothing comes down for hitting a number.</div>
+      <div class="tok-row"><b>DOSES.</b> Finish a Prescription and it counts. What the clinic cannot stop taking climbs The Chart.</div>
       <div class="barcode"></div>
-    </div>
-
-    <div class="sheet s4" id="casesSheet" style="animation-delay:.85s">
-      <div class="tok-h">ON THE RECORD</div>
-      <div id="caseList">
-        <div class="tok-row">Nothing on the record yet. The first patient to publish is going to be very easy to find.</div>
-      </div>
-      <a class="readmore" href="https://music.apesonus.com/records">Read the records &rarr;</a>
-    </div>
-
-    <div class="sheet s5" id="medsSheet" style="display:none;animation-delay:.9s">
-      <div class="tok-h" id="medsTitle">TAKE YOUR $MEDS.</div>
-      <div class="tok-row" id="medsBlurb">The fan token of the clinic. Admission is always priced in dollars. Pay in USDC, or take the clinic rate with the token. Active case studies can earn it back when genuine listeners take their published Prescriptions.</div>
-      <div class="ca" id="medsCaRow">
-        <code id="medsCa"></code>
-        <button type="button" id="medsCopy">Copy contract</button>
-      </div>
-      <a class="readmore" id="medsBuy" href="#" target="_blank" rel="noopener">Get it &rarr;</a>
+      <a class="readmore" href="https://music.apesonus.com">Enter the Ward &rarr;</a>
     </div>
 
     <div class="sheet s2" style="animation-delay:.95s">
@@ -311,10 +297,9 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
       </div>
     </div>
 
-    <p class="coin">Every Dose counts, and official Prescriptions and patient cases rank on the same floor: <a href="https://music.apesonus.com/chart">view the chart</a> or <a href="https://music.apesonus.com/records">read the records</a>.</p>
+    <p class="coin">Every finished listen is a Dose, and whatever the clinic cannot stop taking sits at the top of <a href="https://music.apesonus.com/chart">the Chart</a>.</p>
 
     <div class="socials"><a href="https://x.com/apesonus" target="_blank" rel="noopener">X</a></div>
-    <div class="legal" id="legalToken">Any contract address not published on this page is not ours.</div>
     <div class="legal">Unlicensed · Unbothered · Not financial advice</div>
   </div>
 
@@ -322,7 +307,8 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
     <div class="pl" id="plDoc" style="width:100%;height:100%"><img src="/comic/dr-onus.webp" alt="Dr. Onus, resident unlicensed therapist" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%"></div>
     <div class="rim"></div>
     <div class="flick" aria-hidden="true"></div>
-    <div class="clip">RESIDENT · UNLICENSED</div>
+    <div class="clip"><b>DR. ONUS</b><span>DIRECTOR OF THE CLINIC</span></div>
+    <div class="saying">&ldquo;We have reviewed the charts. Unfortunately, you are exactly where you belong.&rdquo;</div>
     <div class="appwrap">
       <div class="player" id="player">
         <div class="row">
@@ -341,48 +327,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
 
 <audio id="track" preload="auto" src="/ape-first.mp3"></audio>
 
-<script>
-/* THE TOKEN SWITCH.
-   Everything about it lives in /meds.json so nothing here has to be edited by
-   hand on launch day. While live is false the section is not in the page at
-   all, and the site says nothing about a token. */
-(function(){
-  fetch('/meds.json?v=' + Date.now()).then(function(r){ return r.json() }).then(function(m){
-    if (!m || m.live !== true || !m.ca) return
-    var sym = m.symbol || 'MEDS'
-    var sheet = document.getElementById('medsSheet')
-    document.getElementById('medsTitle').textContent = 'TAKE YOUR $' + sym + '.'
-    document.getElementById('medsCa').textContent = m.ca
-    var buy = document.getElementById('medsBuy')
-    buy.href = m.buyUrl || ('https://pump.fun/coin/' + m.ca)
-    buy.textContent = 'Get $' + sym + ' \u2192'
-    var pay = document.getElementById('medsPay')
-    if (pay) pay.textContent = '\u00b7 USDC OR $' + sym
-    var legal = document.getElementById('legalToken')
-    if (legal) legal.textContent = 'The only official $' + sym + ' contract is the one on this page.'
-    document.getElementById('medsCopy').addEventListener('click', function(){
-      navigator.clipboard.writeText(m.ca)
-      this.textContent = 'Copied'
-      var b = this
-      setTimeout(function(){ b.textContent = 'Copy contract' }, 1600)
-    })
-    sheet.style.display = ''
-
-    /* The bar at the very top. Same contract, said first and said loudest. */
-    var url = m.buyUrl || ('https://pump.fun/coin/' + m.ca)
-    document.getElementById('caSym').textContent = sym
-    document.getElementById('caTop').textContent = m.ca
-    document.getElementById('caBuyTop').href = url
-    document.getElementById('caCopyTop').addEventListener('click', function(){
-      navigator.clipboard.writeText(m.ca)
-      this.textContent = 'COPIED'
-      var b = this
-      setTimeout(function(){ b.textContent = 'COPY' }, 1600)
-    })
-    document.getElementById('caBar').style.display = 'flex'
-  }).catch(function(){})
-})()
-</script>
 <script>
 (function(){
   var LINE='YOU HAVE CRYPTO DEGENERACY', el=document.getElementById('typed'), i=0;
@@ -419,12 +363,6 @@ html,body{background:var(--ink);color:var(--txt);font-family:Archivo,Inter,syste
     document.removeEventListener('pointerdown',firstTap);
   }
   document.addEventListener('pointerdown',firstTap);
-  var cbtn=document.getElementById('cacopy'),caddr=document.getElementById('caaddr');
-  if(cbtn&&caddr){cbtn.addEventListener('click',function(){
-    try{navigator.clipboard.writeText(caddr.textContent.trim()).then(function(){
-      cbtn.textContent='COPIED';setTimeout(function(){cbtn.textContent='COPY CA';},1400);
-    }).catch(function(){});}catch(e){}
-  });}
 })();
 </script>
 <script>
